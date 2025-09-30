@@ -1,0 +1,99 @@
+1. Cree un algoritmo para ver un video en YouTube. Sea lo más especifico posible.
+    
+    Respuesta:
+    
+    1. Inicio
+    2. Si tiene computadora
+        1. Abrir sus navegador favorito
+        2. Navegar a Youtube.com
+            1. Escribir [Youtube.com](http://Youtube.com) en la barrar de dirección
+            2. Presionar la tecla enter 
+    3. Sino, si tiene celular, o si tiene tablet, o si tiene smart TV, o si tiene smart watch y el smart watch tiene Wear OS
+        1. Abrir la aplicación de YouTube
+    4. Sino,
+        1. Pidir un celular o una tablet prestada
+        2. Abrir la aplicación de YouTube
+    5. Buscar el video que quire ver
+        1. Si el dispositivo es una computadora
+            1. Hacer click en la barra de direcciones
+        2. Sino
+            1. Seleccionar el botón buscar
+        3. Digitar el nombre del video
+        4. Presionar la tecla enter o buscar
+    6. Iniciar la reproducción del video
+        1. Hacer click en el botón de play
+        2. Hacer click en el botón de maximizar video
+    7. Ver el video
+        1. Mientras el video se esté reproduciendo
+            1. Mantener la vista en la pantalla del dispositivo
+    8. Fin
+
+1. Cree un algoritmo que describa su rutina diaria. Use condiciones, condiciones multiples y ciclos.
+    
+    
+    1. Inicio
+    2. Me despierto
+    3. Saludo de buenos días a mi esposa
+        1. Le digo buenos días a mi esposa
+        2. Le doy un beso a mi esposa
+    4. Me levanto
+    5. Me cepillo los dientes
+        1. Agarro el cepillo
+        2. Le pongo pasta de dientes
+        3. Con el cepillo me restriego los dientes
+        4. Me enjuago la boca
+        5. Enjuago el cepillo
+    6. Me baño
+        1. Me quito la ropa
+        2. Abro la ducha
+        3. Regulo la temperatura del agua
+            1. Si el clima está muy caliente
+                1. Regulo el agua para que esté temperatura ambiente
+            2. Sino, 
+                1. Regulo el agua para que esté caliente
+        4. Me enjabono
+        5. Me enjuago el jabón
+        6. Cierro la ducha
+        7. Me seco con el paño
+    7. Me visto
+    8. Saludo de buenos día a mi hijo
+    9. Si es día de semana y no es feriado
+        1. Si mi hijo tiene que ir al kinder
+            1. Preparo la merienda que mi hijo lleva al kinder
+            2. Preparo el bulto que mi hijo lleva al kinder
+            3. Me despido de mi hijo
+        2. Si mi esposa tiene ir a trabajar a la oficina
+            1. Me despido de mi esposa
+        3. Desayuno
+        4. Me conecto a trabajar
+            1. Mientras la hora actual sea menor a las 12md
+                1. Sigo trabajando
+        5. Almuerzo
+        6. Me reconecto a trabajar
+            1. Mientras la hora actual sea menor a las 4:30pm
+                1. Sigo trabajando
+        7. Me desconecto del trabajo
+        8. Voy a buscar a mi hijo al kinder
+            1. Me subo al carro
+            2. Manejo hasta el kinder
+            3. Toco el timbre
+            4. Informo que vine a buscar a mi hijo
+            5. Espero a que me lo entreguen
+            6. Manejo de regreso a la casa
+    10. Sino,
+        1. Si hay dinero y tenemos energía
+            1. Salimos a pasear
+            2. Desayunamos a fuera de la casa
+            3. Almorzamos fuera de la casa
+        2. Sino,
+            1. Nos quedamos en la casa
+            2. Desayunamos en la casa
+            3. Almorzamos en la casa
+    11. Si no es domingo
+        1. Estudio
+    12. Juego con mi hijo
+    13. Ceno
+    14. Mientras no tenga sueño
+        1. Veo TV o una serie o una película
+    15. Me acuesto a dormir
+    16. Fin
