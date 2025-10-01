@@ -1,34 +1,4 @@
-1. Cree un algoritmo para ver un video en YouTube. Sea lo más especifico posible.
-    
-    Respuesta:
-    
-    1. Inicio
-    2. Si tiene computadora
-        1. Abrir sus navegador favorito
-        2. Navegar a Youtube.com
-            1. Escribir [Youtube.com](http://Youtube.com) en la barrar de dirección
-            2. Presionar la tecla enter 
-    3. Sino, si tiene celular, o si tiene tablet, o si tiene smart TV, o si tiene smart watch y el smart watch tiene Wear OS
-        1. Abrir la aplicación de YouTube
-    4. Sino,
-        1. Pidir un celular o una tablet prestada
-        2. Abrir la aplicación de YouTube
-    5. Buscar el video que quire ver
-        1. Si el dispositivo es una computadora
-            1. Hacer click en la barra de direcciones
-        2. Sino
-            1. Seleccionar el botón buscar
-        3. Digitar el nombre del video
-        4. Presionar la tecla enter o buscar
-    6. Iniciar la reproducción del video
-        1. Hacer click en el botón de play
-        2. Hacer click en el botón de maximizar video
-    7. Ver el video
-        1. Mientras el video se esté reproduciendo
-            1. Mantener la vista en la pantalla del dispositivo
-    8. Fin
-
-1. Cree un algoritmo que describa su rutina diaria. Use condiciones, condiciones multiples y ciclos.
+2. Cree un algoritmo que describa su rutina diaria. Use condiciones, condiciones multiples y ciclos.
     
     
     1. Inicio
