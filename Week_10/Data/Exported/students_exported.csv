@@ -1,0 +1,117 @@
+full_name,section,spanish_grade,english_grade,social_grade,science_grade
+Valeria Rodríguez,11A,87,92,85,90
+Carlos Méndez,11B,78,81,76,80
+Lucía Fernández,11C,95,88,90,93
+Andrés Solano,11A,82,79,84,86
+María José Vargas,11B,91,94,89,92
+Esteban Ramírez,11C,76,73,70,75
+Sofía Jiménez,11A,88,90,87,89
+Daniela Mora,11B,85,83,80,84
+Julián Castro,11C,92,95,93,96
+Camila Navarro,11A,79,77,75,78
+Fernando Rojas,11B,86,89,88,90
+Isabella Soto,11C,90,91,92,94
+Mateo Pineda,11A,74,70,72,73
+Natalia Céspedes,11B,93,96,94,95
+Gabriel Chaves,11C,81,84,83,85
+Laura Salas,11A,89,87,86,88
+Sebastián León,11B,77,75,78,76
+Ana María Ureña,11C,94,97,95,96
+Tomás Aguilar,11A,80,82,79,81
+Paola Araya,11B,83,85,82,84
+Luis Alvarado,11A,58,62,55,60
+Andrea Porras,11B,91,88,93,90
+Jorge Céspedes,11C,67,70,65,68
+Mariana Rojas,11A,85,82,80,83
+Kevin Jiménez,11B,59,61,58,60
+Daniela Solís,11C,94,96,92,95
+Ricardo Vargas,11A,73,75,70,72
+Sofía Chacón,11B,88,90,86,89
+Pablo Méndez,11C,64,60,62,63
+Natalia Ramírez,11A,92,94,91,93
+Esteban Mora,11B,55,58,53,56
+Camila Soto,11C,78,80,76,79
+José Luis Navarro,11A,69,65,67,68
+Laura Fernández,11B,87,89,85,88
+Mauricio Salas,11C,60,59,61,62
+Isabel Aguilar,11A,95,97,93,96
+Andrés Chaves,11B,72,74,70,73
+Valentina Ureña,11C,84,86,82,85
+Carlos Rojas,11A,57,54,59,55
+Lucía Vargas,11B,90,92,88,91
+Tomás Pineda,11C,66,63,65,64
+Fernanda León,11A,81,83,79,82
+Gabriel Araya,11B,76,78,74,77
+Ana María Solano,11C,93,95,90,94
+Sebastián Ramírez,11A,62,60,58,61
+Paola Jiménez,11B,89,91,87,90
+Julián Céspedes,11C,74,76,72,75
+María José Navarro,11A,96,98,94,97
+Daniel Chacón,11B,68,66,64,67
+Isabella Mora,11C,83,85,81,84
+Mateo Vargas,11A,50,52,48,51
+Laura Salas,11B,86,88,84,87
+Esteban Aguilar,11C,77,79,75,78
+Sofía Méndez,11A,93,95,91,94
+Carlos Jiménez,11B,61,63,59,62
+Lucía Fernández,11C,80,82,78,81
+Andrés Solano,11A,70,72,68,71
+María José Vargas,11B,88,90,86,89
+Esteban Ramírez,11C,56,58,54,57
+Sofía Jiménez,11A,91,93,89,92
+Daniela Mora,11B,65,67,63,66
+Julián Castro,11C,79,81,77,80
+Camila Navarro,11A,60,62,58,61
+Fernando Rojas,11B,85,87,83,86
+Isabella Soto,11C,94,96,92,95
+Mateo Pineda,11A,73,75,71,74
+Natalia Céspedes,11B,90,92,88,91
+Gabriel Chaves,11C,66,68,64,67
+Laura Salas,11A,82,84,80,83
+Sebastián León,11B,58,60,56,59
+Ana María Ureña,11C,95,97,93,96
+Tomás Aguilar,11A,69,71,67,70
+Paola Araya,11B,77,79,75,78
+Luis Alvarado,11C,54,56,52,55
+Andrea Porras,11A,89,91,87,90
+Jorge Céspedes,11B,63,65,61,64
+Mariana Rojas,11C,84,86,82,85
+Kevin Jiménez,11A,59,57,55,58
+Daniela Solís,11B,92,94,90,93
+Ricardo Vargas,11C,71,73,69,72
+Sofía Chacón,11A,87,89,85,88
+Pablo Méndez,11B,60,62,58,61
+Natalia Ramírez,11C,93,95,91,94
+Esteban Mora,11A,55,53,51,54
+Camila Soto,11B,79,81,77,80
+José Luis Navarro,11C,68,70,66,69
+Laura Fernández,11A,90,92,88,91
+Mauricio Salas,11B,62,64,60,63
+Isabel Aguilar,11C,96,98,94,97
+Andrés Chaves,11A,74,76,72,75
+Valentina Ureña,11B,83,85,81,84
+Carlos Rojas,11C,57,59,55,58
+Lucía Vargas,11A,91,93,89,92
+Tomás Pineda,11B,65,67,63,66
+Fernanda León,11C,80,82,78,81
+Gabriel Araya,11A,76,78,74,77
+Ana María Solano,11B,94,96,92,95
+Sebastián Ramírez,11C,61,63,59,62
+Paola Jiménez,11A,88,90,86,89
+Julián Céspedes,11B,72,74,70,73
+María José Navarro,11C,97,99,95,98
+Daniel Chacón,11A,67,69,65,68
+Isabella Mora,11B,82,84,80,83
+Mateo Vargas,11C,49,51,47,50
+Laura Salas,11A,85,87,83,86
+Esteban Aguilar,11B,78,80,76,79
+Sofía Méndez,11C,94,96,92,95
+Carlos Jiménez,11A,60,62,58,61
+Lucía Fernández,11B,81,83,79,82
+Andrés Solano,11C,70,72,68,71
+María José Vargas,11A,89,91,87,90
+Esteban Ramírez,11B,57,59,55,58
+Sofía Jiménez,11C,92,94,90,93
+Daniela Mora,11A,64,66,62,65
+Julián Castro,11B,75,77,73,76
+Camila Navarro,11C,59,61,57,60
