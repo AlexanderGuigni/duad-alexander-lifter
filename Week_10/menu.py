@@ -64,8 +64,11 @@ def run_menu_option(menu_option):
                 actions.display_total_grades_average(students_list)
             elif menu_option[0] == 7:
                 students_list = data.read_csv("Data\students.csv")
-                if data.save_csv("Data\Exported\students_exported.csv", students_list):
-                    print("-Students exported successfully to Exported folder")
+                if students_list != []:    
+                    if data.save_csv("Data\Exported\students_exported.csv", students_list):
+                        print("-Students exported successfully to Exported folder")
+                else:
+                    print("-No entries to export")
             elif menu_option[0] == 8:
                 students_list = data.read_csv("Data\students.csv")
                 students_list = data.import_csv(students_list)

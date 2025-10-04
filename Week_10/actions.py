@@ -69,22 +69,24 @@ def delete_student(student_list):
 
 def display_students_infromation(students_list):
     counter = 1
-    try:
-        print(">> Students list <<")
-        print("")
-        for student in students_list:
-            print(f"{counter}. {student.get("full_name")}")
-            counter = counter + 1
-            print(f"> Section: {student.get("section")}")
-            print("> Grades")
-            print(f"   Spanish: {student.get("spanish_grade")}")
-            print(f"   English: {student.get("english_grade")}")
-            print(f"   Social: {student.get("social_grade")}")
-            print(f"   Science: {student.get("science_grade")}")
+    if students_list != []:
+        try:
+            print(">> Students list <<")
             print("")
-    except Exception as ex:
-        print(f"Error displaying the student list: {ex} ")
-
+            for student in students_list:
+                print(f"{counter}. {student.get("full_name")}")
+                counter = counter + 1
+                print(f"> Section: {student.get("section")}")
+                print("> Grades")
+                print(f"   Spanish: {student.get("spanish_grade")}")
+                print(f"   English: {student.get("english_grade")}")
+                print(f"   Social: {student.get("social_grade")}")
+                print(f"   Science: {student.get("science_grade")}")
+                print("")
+        except Exception as ex:
+            print(f"Error displaying the student list: {ex} ")
+    else:
+        print("-Any student registered")
 
 def calculate_student_average(student_info):
     average = 0
@@ -138,30 +140,34 @@ def dispaly_highest_grade_averages(students_list):
 
 def display_reproved_students(students_list):
     counter = 1
-    try:
-        print("")
-        print(">> Students reproved <<")
-        print("")
-        for student in students_list:
-            if (float(student.get("spanish_grade")) < 60 or float(student.get("english_grade")) < 60 or float(student.get("social_grade")) < 60 or float(student.get("science_grade")) < 60):
-                print(f"{counter}. Student {student.get("full_name")} from section: {student.get("section")}")
-                counter = counter + 1
-    except Exception as ex:
-        print(f"Error displaying reproved the student list: {ex} ")
-
+    if students_list != []:
+        try:
+            print("")
+            print(">> Students reproved <<")
+            print("")
+            for student in students_list:
+                if (float(student.get("spanish_grade")) < 60 or float(student.get("english_grade")) < 60 or float(student.get("social_grade")) < 60 or float(student.get("science_grade")) < 60):
+                    print(f"{counter}. Student {student.get("full_name")} from section: {student.get("section")}")
+                    counter = counter + 1
+        except Exception as ex:
+            print(f"Error displaying reproved the student list: {ex} ")
+    else:
+        print("-Any student registered")
 
 def display_total_grades_average(students_list):
     total_grades_average = 0
-    try:
-        for student in students_list:
-            total_grades_average = total_grades_average + calculate_student_average(student)
-        total_grades_average = total_grades_average / len(students_list)
-    except Exception as ex:
-        print(f"Error displaying total grades average: {ex}")
+    if students_list != []:    
+        try:
+            for student in students_list:
+                total_grades_average = total_grades_average + calculate_student_average(student)
+            total_grades_average = total_grades_average / len(students_list)
+        except Exception as ex:
+            print(f"Error displaying total grades average: {ex}")
 
-    print(">> Total grades average <<")
-    print(f"Total average: {round(total_grades_average,2)}")
-
+        print(">> Total grades average <<")
+        print(f"Total average: {round(total_grades_average,2)}")
+    else:
+        print("-Any student registered")
 
 def validate_if_reppeat_action(message):
     response = input(f"{message} (Yes = Y / No / N): ")

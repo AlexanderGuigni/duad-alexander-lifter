@@ -1,9 +1,13 @@
-import csv
+import csv, os
 
 
 def read_csv(path):
     students_list = []
     try:
+        if not os.path.exists(path):
+            print(f"-File '{path}' not found")
+            return students_list
+
         with open(path,"r",encoding = "utf-8") as student_csv:
             reader = csv.DictReader(student_csv)
             for item in reader:
