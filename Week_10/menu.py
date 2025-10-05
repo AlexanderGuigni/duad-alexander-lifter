@@ -11,10 +11,11 @@ def display_menu():
     print("6. View total grades average")
     print("7. Export existing students information to CSV")
     print("8. Import students (.csv file)")
+    print("9. Exit")
 
 
 def get_menu_option():
-    menu_options = [1,2,3,4,5,6,7,8]
+    menu_options = [1,2,3,4,5,6,7,8,9]
     option_selected = input("Desired menu option: ")
     is_valid_option = False
     try:
@@ -30,6 +31,7 @@ def get_menu_option():
 
 
 def run_menu_option(menu_option):
+    show_menu_again = True
     try:
         students_list = []
         if(menu_option[1] != False):
@@ -74,5 +76,13 @@ def run_menu_option(menu_option):
                 students_list = data.import_csv(students_list)
                 if data.save_csv("Data\students.csv", students_list):
                     print("-Students imported successfully")
+            elif menu_option[0] == 9:
+                show_menu_again = False
+
+            if menu_option[0] != 9:
+                print("")
+                input("Type any key to continue")
+                print("")
     except Exception as ex:
-        print(f"Error: {ex}")            
+        print(f"Error: {ex}")  
+    return show_menu_again          

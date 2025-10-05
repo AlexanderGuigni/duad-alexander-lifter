@@ -154,6 +154,7 @@ def display_reproved_students(students_list):
     else:
         print("-Any student registered")
 
+
 def display_total_grades_average(students_list):
     total_grades_average = 0
     if students_list != []:    
@@ -168,6 +169,7 @@ def display_total_grades_average(students_list):
         print(f"Total average: {round(total_grades_average,2)}")
     else:
         print("-Any student registered")
+
 
 def validate_if_reppeat_action(message):
     response = input(f"{message} (Yes = Y / No / N): ")
