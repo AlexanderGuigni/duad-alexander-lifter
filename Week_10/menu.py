@@ -30,52 +30,53 @@ def get_menu_option():
     return [option_selected, is_valid_option]
 
 
-def run_menu_option(menu_option):
+def run_menu_option(menu_option,students_list):
     show_menu_again = True
     try:
-        students_list = []
+        #students_list = students
         if(menu_option[1] != False):
             if menu_option[0] == 1:
                 add_more = True
                 while add_more:
-                    students_list = data.read_csv("Data\students.csv")
+                    #students_list = data.read_csv("Data\students.csv")
                     student_info = actions.get_student_info()
                     students_list.append(student_info)
-                    if data.save_csv("Data\students.csv",students_list):
-                        print(f"-Student {student_info["full_name"]} added successfully")
-                        add_more = actions.validate_if_reppeat_action("Do you want to add another student?")
+                    #if data.save_csv("Data\students.csv",students_list):
+                    print(f"-Student {student_info["full_name"]} added successfully")
+                    add_more = actions.validate_if_reppeat_action("Do you want to add another student?")
             elif menu_option[0] == 2:
                 delete_more = True
                 while delete_more:
-                    students_list = data.read_csv("Data\students.csv")
-                    students_list = actions.delete_student(students_list)
-                    if students_list != None and data.save_csv("Data\students.csv",students_list[0]):
-                        print(f"-Student {students_list[1]["full_name"]} was deleted successfully")
+                    #students_list = data.read_csv("Data\students.csv")
+                    result = actions.delete_student(students_list)
+                    students_list = result[0]
+                    #if students_list != None and data.save_csv("Data\students.csv",students_list[0]):
+                    print(f"-Student {result[1]["full_name"]} was deleted successfully")
                     delete_more = actions.validate_if_reppeat_action("Do you want to delete another student?")
             elif menu_option[0] == 3:
-                students_list = data.read_csv("Data\students.csv")
+                #students_list = data.read_csv("Data\students.csv")
                 actions.display_students_infromation(students_list)
             elif menu_option[0] == 4:
-                students_list = data.read_csv("Data\students.csv")
+                #students_list = data.read_csv("Data\students.csv")
                 actions.dispaly_highest_grade_averages(students_list)
             elif menu_option[0] == 5:
-                students_list = data.read_csv("Data\students.csv")
+                #students_list = data.read_csv("Data\students.csv")
                 actions.display_reproved_students(students_list)
             elif menu_option[0] == 6:
-                students_list = data.read_csv("Data\students.csv")
+                #students_list = data.read_csv("Data\students.csv")
                 actions.display_total_grades_average(students_list)
             elif menu_option[0] == 7:
-                students_list = data.read_csv("Data\students.csv")
+                #students_list = data.read_csv("Data\students.csv")
                 if students_list != []:    
                     if data.save_csv("Data\Exported\students_exported.csv", students_list):
                         print("-Students exported successfully to Exported folder")
                 else:
                     print("-No entries to export")
             elif menu_option[0] == 8:
-                students_list = data.read_csv("Data\students.csv")
+                #students_list = data.read_csv("Data\students.csv")
                 students_list = data.import_csv(students_list)
-                if data.save_csv("Data\students.csv", students_list):
-                    print("-Students imported successfully")
+                #if data.save_csv("Data\students.csv", students_list):
+                print("-Students imported successfully")
             elif menu_option[0] == 9:
                 show_menu_again = False
 
@@ -85,4 +86,4 @@ def run_menu_option(menu_option):
                 print("")
     except Exception as ex:
         print(f"Error: {ex}")  
-    return show_menu_again          
+    return [show_menu_again, students_list]          
