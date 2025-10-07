@@ -64,7 +64,6 @@ def run_menu_option(menu_option,students_list):
                     print("-No entries to export")
             elif menu_option[0] == 8:
                 students_list = data.import_csv(students_list)
-                print("-Students imported successfully")
             elif menu_option[0] == 9:
                 show_menu_again = False
 

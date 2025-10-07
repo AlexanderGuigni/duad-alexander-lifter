@@ -6,16 +6,18 @@ def read_csv(path):
     try:
         if not os.path.exists(path):
             print(f"-File '{path}' not found")
-            return students_list
-
-        with open(path,"r",encoding = "utf-8") as student_csv:
-            reader = csv.DictReader(student_csv)
-            for item in reader:
-                if item != []:
-                    students_list.append(item)
-            return students_list    
+            
+        else:
+            with open(path,"r",encoding = "utf-8") as student_csv:
+                reader = csv.DictReader(student_csv)
+                for item in reader:
+                    if item != []:
+                        students_list.append(item)
+                print("-Students imported successfully")    
     except Exception as ex:
         print(f"Error reading CSV: {ex}")
+    
+    return students_list
 
 
 def import_csv(student_list):
