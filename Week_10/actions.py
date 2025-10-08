@@ -109,8 +109,11 @@ def dispaly_highest_grade_averages(students_list):
                 average = calculate_student_average(student)
                 #student["average"] = average
                 if average > average_1[1]:
+                    average_3 = average_2
+                    average_2 = average_1
                     average_1 = [student,average]
                 elif average > average_2[1]:
+                    average_3 = average_2
                     average_2 = [student,average]
                 elif average > average_3[1]:
                     average_3 = [student,average]
