@@ -2,7 +2,8 @@ from BankAccount import BankAccount
 
 class SavingAccount(BankAccount):
 
-    def __init__(self,main_balance):
+    def __init__(self,main_balance,initial_balance=0):
+        super().__init__(initial_balance)
         self.main_balance = main_balance
 
     def withdraw(self, amount):
