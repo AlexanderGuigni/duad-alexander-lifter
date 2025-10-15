@@ -1,13 +1,17 @@
 from User import User
 
 def is_adult(func):
-    def wrapper(*args):
-        for arg in args:
-            if isinstance(arg, User):
-                if arg.age < 18:
-                    print(f"Error running {func.__name__}: User is not an adult.")
-                    return
-        return func(*args)
+    def wrapper(*args, **kwargs):
+        all_args = args + tuple(kwargs.values())
+        try:
+            for arg in all_args:
+                if isinstance(arg, User):
+                    if arg.age < 18:
+                        raise ValueError(f"Error running {func.__name__}: User is not an adult.")
+            return func(*args, **kwargs)
+        except ValueError as ex:
+            print(ex)
+            
     
     return wrapper
 
@@ -28,6 +32,13 @@ def rent_car(user, car_model):
 def book_hotel(user, hotel_name, nights):
     print(f"{user.name} booked {nights} nights at {hotel_name}.")
 
+@is_adult
+def book_hotel_kwargs(**kwargs):
+    user = kwargs.get("user")
+    hotel_name = kwargs.get("hotel_name")
+    nights = kwargs.get("nights")
+    print(f"{user.name} booked {nights} nights at {hotel_name}.")
+
 def main():
     try:
         user1 = User("Alice", "1990-05-15")
@@ -43,6 +54,8 @@ def main():
         enter_club(user3)
         rent_car(user3, "Honda")
         book_hotel(user3, "Marriott", 2)
+
+        book_hotel_kwargs(user=user1, hotel_name="Sheraton", nights=4)
 
     except Exception as ex:
         print(f"Error: {ex}")
