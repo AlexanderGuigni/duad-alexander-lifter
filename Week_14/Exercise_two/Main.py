@@ -1,0 +1,56 @@
+from Node import Node
+from DoubleEndedQueque import DoubleEndedQueque
+
+def main():
+    try:
+        node_one = Node("First Node")
+        node_two = Node("Second Node")
+        node_three = Node("Third Node")
+        node_four = Node("Fourth Node")
+        node_five = Node("Fifth Node")
+        node_six= Node("Sixth Node")
+        
+        print(">> Create astack <<")
+        my_dequeque = DoubleEndedQueque(node_five)
+        my_dequeque.print_stack()
+        print(">> Push Left <<")
+        my_dequeque.push_left(node_four)
+        my_dequeque.print_stack()
+        print(">> Pop Left")
+        my_dequeque.pop_left()
+        my_dequeque.print_stack()
+        print(">> Push Right <<")
+        my_dequeque.push_right(node_six)
+        my_dequeque.print_stack()
+        print(">> Pop Right <<")
+        my_dequeque.pop_right()
+        my_dequeque.print_stack()
+        print(">> Pop Left <<")
+        my_dequeque.pop_left()
+        my_dequeque.print_stack()
+        print(">> Pop Right <<")
+        my_dequeque.pop_right()
+        my_dequeque.print_stack()
+        # print(">> Push 4 modules <<")
+        # my_dequeque.push(node_four)
+        # my_dequeque.push(node_three)
+        # my_dequeque.push(node_two)
+        # my_dequeque.push(node_one)
+        # my_dequeque.print_stack()
+        # print(">> Pop one module <<")
+        # my_dequeque.pop()
+        # my_dequeque.print_stack()
+        # print(">> Pop one module <<")
+        # my_dequeque.pop()
+        # my_dequeque.print_stack()
+        # print(">> Adding a module with other module <<")
+        
+        # node_new_one = Node("New First Node")
+        # node_new_two = Node("New Second Node")
+        # node_new_one.next = node_new_two
+        # my_dequeque.push(node_new_one)
+        # my_dequeque.print_stack()
+    except Exception as ex:
+        print(f"Error in the main function: {ex}")
+
+main()
