@@ -1,0 +1,62 @@
+Id,Category,Type,Amount,Description,Date
+2,Housing,Expense,750,Rent payment,01-10-2025
+3,Transportation,Expense,45,Gas refill,02-10-2025
+4,Food,Expense,120,Grocery shopping,03-10-2025
+5,Utilities,Expense,60,Electricity bill,04-10-2025
+6,Entertainment,Expense,30,Movie night,05-10-2025
+7,Healthcare,Expense,90,Dental checkup,06-10-2025
+8,Insurance,Expense,200,Car insurance,07-10-2025
+9,Education,Expense,300,Online course,08-10-2025
+10,Savings,Income,500,Monthly savings deposit,09-10-2025
+11,Salary,Income,1500,October salary,10-10-2025
+12,Freelance,Income,250,Website design project,11-10-2025
+13,Investments,Income,100,Stock dividends,12-10-2025
+14,Gifts,Income,75,Birthday gift from aunt,13-10-2025
+15,Childcare,Expense,150,Daycare fees,14-10-2025
+16,Clothing,Expense,80,New shoes,15-10-2025
+17,Subscriptions,Expense,15,Streaming service,16-10-2025
+18,Bonuses,Income,300,Quarterly bonus,17-10-2025
+19,Rental Income,Income,600,Apartment rental,18-10-2025
+20,Pet Care,Expense,40,Dog grooming,19-10-2025
+21,Travel,Expense,500,Weekend trip,20-10-2025
+22,Food,Expense,25,Lunch at café,21-10-2025
+23,Transportation,Expense,10,Bus fare,22-10-2025
+24,Healthcare,Expense,60,Pharmacy purchase,23-10-2025
+25,Salary,Income,1500,November salary,24-10-2025
+26,Investments,Income,200,Crypto gains,25-10-2025
+27,Education,Expense,50,Books for class,26-10-2025
+28,Clothing,Expense,100,Winter jacket,27-10-2025
+29,Entertainment,Expense,20,Concert ticket,28-10-2025
+30,Subscriptions,Expense,12,Music app,29-10-2025
+31,Freelance,Income,400,Mobile app development,30-10-2025
+32,Pet Care,Expense,30,Cat food,31-10-2025
+33,Gifts,Income,100,Gift from parents,01-11-2025
+34,Bonuses,Income,250,Performance bonus,02-11-2025
+35,Childcare,Expense,120,Babysitter,03-11-2025
+36,Travel,Expense,300,Flight ticket,04-11-2025
+37,Utilities,Expense,70,Water bill,05-11-2025
+38,Housing,Expense,750,Rent payment,06-11-2025
+39,Savings,Income,500,Monthly savings deposit,07-11-2025
+40,Transportation,Expense,35,Taxi ride,08-11-2025
+41,Food,Expense,90,Supermarket run,09-11-2025
+42,Healthcare,Expense,110,Eye exam,10-11-2025
+43,Insurance,Expense,180,Health insurance,11-11-2025
+44,Education,Expense,250,Workshop fee,12-11-2025
+45,Salary,Income,1500,December salary,13-11-2025
+46,Investments,Income,150,Mutual fund return,14-11-2025
+47,Entertainment,Expense,40,Game purchase,15-11-2025
+48,Clothing,Expense,60,T-shirt and jeans,16-11-2025
+49,Subscriptions,Expense,20,Online magazine,17-11-2025
+50,Freelance,Income,350,Logo design,18-11-2025
+51,Rental Income,Income,600,Apartment rental,19-11-2025
+52,Income Tax,Expense,1000,Monthly tax payment,19-11-2025
+53,Food,Expense,17500,Lunch out with family,02-11-2025
+54,Rent Outcome,Expense,300000,House rent,02-11-2025
+55,Entertainment,Expense,4500,Cinema ticket,02-11-2025
+56,Savings,Income,15000,Octover's Savings,31-10-2025
+57,Salary,Income,2000000,PGD Salary,02-11-2025
+58,Education,Expense,193600,Monthly Pay,30-10-2025
+59,Rental Income,Income,25000,Build #6 Apt #1,01-11-2025
+60,Healthcare,Expense,98000,Blood exam,29-10-2025
+61,Transportation,Expense,520000,Plane ticket to Texas,03-11-2025
+62,Gifts,Income,75000,Company gift card,03-11-2025

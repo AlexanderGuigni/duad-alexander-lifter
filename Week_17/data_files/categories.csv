@@ -1,0 +1,22 @@
+Id,Category,Type
+2,Housing,Expense
+3,Transportation,Expense
+4,Food,Expense
+5,Utilities,Expense
+6,Entertainment,Expense
+7,Healthcare,Expense
+8,Insurance,Expense
+9,Education,Expense
+10,Savings,Income
+11,Salary,Income
+12,Freelance,Income
+13,Investments,Income
+14,Gifts,Income
+15,Childcare,Expense
+16,Clothing,Expense
+17,Subscriptions,Expense
+18,Bonuses,Income
+19,Rental Income,Income
+20,Pet Care,Expense
+21,Rent Outcome,Expense
+22,Pet care,Expense
