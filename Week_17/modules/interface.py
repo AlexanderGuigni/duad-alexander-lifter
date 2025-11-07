@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from actions import convert_list_of_lists, filter_by_date, format_list_to_money, get_today_date, get_first_day_current_month_date,sort_list_of_list
+from actions import convert_list_of_lists, filter_by_date, format_list_to_money, get_today_date, get_first_day_current_month_date,sort_list_of_list,compare_dates
 
 
 class Interface:
@@ -20,7 +20,7 @@ class Interface:
 
         layout = [
             [sg.Button(key = "-BUTTON_ADD_CAT-", button_text = "Add Category"), sg.Button(key = "-BUTTON_ADD_MOV_EXP-",button_text = "Add Expense"),sg.Button(key = "-BUTTON_ADD_MOV_INC-",button_text = "Add Income")],
-            [sg.Text(text ="Filter"), sg.Input(key = "-DATE_FROM-",default_text=start_date,size = (15, 1),readonly= True),sg.CalendarButton(button_text="#",format=("%d-%m-%Y")), sg.Input(key = "-DATE_TO-",default_text=current_date, size = (15, 1), readonly= True), sg.CalendarButton(button_text="#",format=("%d-%m-%Y")), sg.Button(key = "-BUTON_FILTER-",button_text ="Apply Filters")],
+            [sg.Text(text ="Filter"), sg.Input(key = "-DATE_FROM-",default_text=start_date,size = (13, 1),readonly= True),sg.CalendarButton(button_text="#",format=("%d-%m-%Y")), sg.Input(key = "-DATE_TO-",default_text=current_date, size = (13, 1), readonly= True), sg.CalendarButton(button_text="#",format=("%d-%m-%Y")), sg.Button(key = "-BUTON_FILTER-",button_text ="Apply Filters"), sg.Text(text = "Start date must be later than the end date",key= "-FILTER_DATES_ERR_MESSAGE-",visible= False,background_color= "red", text_color= "white")],
             [sg.Text("Movements")],
             [sg.Table(key = "-TABLE_MOVMENTS-",values= sort_list_of_list(filtered_movement_data), headings= movement_data[0], auto_size_columns=True, display_row_numbers= False, justification='left', size= (170,18), vertical_scroll_only= True, max_col_width=40)],
         ]
@@ -29,7 +29,6 @@ class Interface:
 
         while True:
             event, values = window.read()
-        
             if event == "-BUTTON_ADD_CAT-":
                 self.open_add_category_window()
                 self.__data.save_csv(False)
@@ -52,8 +51,12 @@ class Interface:
         movement_data[1] = format_list_to_money(movement_data[1])
         from_date = window["-DATE_FROM-"].get()
         to_date = window["-DATE_TO-"].get()
-        filtered_movement_data = filter_by_date(movement_data[1], from_date, to_date)
-        window["-TABLE_MOVMENTS-"].update(values= sort_list_of_list(sort_list_of_list(filtered_movement_data)))
+        if compare_dates(to_date, from_date):
+            window["-FILTER_DATES_ERR_MESSAGE-"].update(visible = False)
+            filtered_movement_data = filter_by_date(movement_data[1], from_date, to_date)
+            window["-TABLE_MOVMENTS-"].update(values= sort_list_of_list(sort_list_of_list(filtered_movement_data)))
+        else:
+            window["-FILTER_DATES_ERR_MESSAGE-"].update(visible = True)
 
     def open_add_category_window(self):
 
@@ -109,7 +112,6 @@ class Interface:
 
         while True:
             event, values = window.read()
-
             if event == "-CATEGORY_NAME-":
                 category_type = list(filter(lambda x: x["Category"] == window["-CATEGORY_NAME-"].get(), category_data_filtered_by_type))[0]["Type"]
                 window["-CATEGORY_NAME-"].update(background_color = "white")

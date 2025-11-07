@@ -43,3 +43,10 @@ def get_first_day_current_month_date():
 
 def sort_list_of_list(my_list):
     return list(sorted(my_list, key= lambda x: (convert_string_to_date(x[5]),x[0]), reverse= True))
+
+def compare_dates(initial_date,final_date):
+    if not isinstance(initial_date, date):
+        initial_date = convert_string_to_date(initial_date)
+    if not isinstance(final_date, date):
+        final_date = convert_string_to_date(final_date)
+    return True if initial_date >= final_date else False
