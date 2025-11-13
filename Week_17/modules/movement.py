@@ -59,7 +59,7 @@ class Movement:
 
 
     def __validate_description(self, description):
-        if len(description) > 0:
+        if description.strip() != "":
             return description
         else:
             raise ValueError("Description cannot be empty.")

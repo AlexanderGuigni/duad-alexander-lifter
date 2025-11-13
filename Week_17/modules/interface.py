@@ -64,7 +64,7 @@ class Interface:
             
             if event == "-BUTTON_CAT_ADD-":
                 category_name = window["-CATEGORY_NAME-"].get()
-                if category_name != "":
+                if category_name.strip() != "":
                     category_type = "Expense" if window["-CAT_TYPE_EXP-"].get() else "Income"
                     finance_manager.add_category(category_name,category_type)
                     break
@@ -127,11 +127,11 @@ class Interface:
                     finance_manager.add_movement(category_name,amount,description,date)
                     break
                 else:
-                    if category_name == "":
+                    if category_name.strip() == "":
                         window["-CATEGORY_NAME-"].update(background_color = "red")
-                    if amount == "":
+                    if amount.strip() == "":
                         window["-AMOUNT-"].update(background_color = "red")
-                    if description == "":
+                    if description.strip() == "":
                         window["-DESCRIP-"].update(background_color = "red")
                     if not date_isvalid:
                         print("here")

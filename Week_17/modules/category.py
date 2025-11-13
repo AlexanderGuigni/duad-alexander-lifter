@@ -39,7 +39,7 @@ class Category:
         return cls("Income")
     
     def __verify_category_name(self, name):
-        if len(name) > 0:
+        if name.strip() != "":
             return name
         else:
             raise ValueError("Category name cannot be empty.")
