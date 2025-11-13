@@ -43,19 +43,24 @@ class Data:
             return False
 
 
-    def add_category(self, category_name, category_type):
-        new_category = {"Id": self.__generate_id(self.category_data), "Category": category_name, "Type": category_type}
+    def add_category(self, category):
+        category_dic = category.get_category_as_dict()
+        new_category = category_dic
         self.category_data.append(new_category)
 
 
-    def add_movement(self, category_name, category_type, amount, description, date):
-        new_movement = {"Id": self.__generate_id(self.movements_data), "Category": category_name, "Type": category_type, "Amount": amount, "Description": description, "Date": date}
+    def add_movement(self, movement):
+        movement_dic = movement.get_movement_as_dict()
+        new_movement = movement_dic
         self.movements_data.append(new_movement)
 
 
-    def __generate_id(self, data_list):
+    def generate_id(self, is_movements=True):
+        if is_movements:
+            data_list = self.movements_data
+        else:
+            data_list = self.category_data
         if len(data_list) <= 1:
             return 1
-        else:
-            last_id = max(int(item['Id']) for item in data_list)
-            return str(last_id + 1)
+        last_id = max(int(item['Id']) for item in data_list)
+        return str(last_id + 1)

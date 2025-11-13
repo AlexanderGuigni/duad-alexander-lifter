@@ -2,8 +2,7 @@ from data import Data
 from interface import Interface
 
 def main():
-    data = Data()
-    interface = Interface(data)
+    interface = Interface()
     interface.open_main_window()
 
 if __name__ == "__main__":

@@ -1,28 +1,21 @@
 import PySimpleGUI as sg
-from actions import convert_list_of_lists, filter_by_date, format_list_to_money, get_today_date, get_first_day_current_month_date,sort_list_of_list,compare_dates
-
+from actions import  get_today_date, get_first_day_current_month_date,sort_list_of_list,compare_dates
+from finance_manager import FinanceManager
 
 class Interface:
 
-    def __init__(self,data):
-        self.__data = data
-        
-
-
     def open_main_window(self):
-        movement_data = convert_list_of_lists(self.__data.movements_data)
-        movement_data[1] = format_list_to_money(movement_data[1])
+        finance_manager = FinanceManager()
 
         current_date = get_today_date()
         start_date = get_first_day_current_month_date()
-
-        filtered_movement_data = filter_by_date(movement_data[1], start_date, current_date)
+        filtered_movement_data = finance_manager.filter_by_date(start_date, current_date)
 
         layout = [
             [sg.Button(key = "-BUTTON_ADD_CAT-", button_text = "Add Category"), sg.Button(key = "-BUTTON_ADD_MOV_EXP-",button_text = "Add Expense"),sg.Button(key = "-BUTTON_ADD_MOV_INC-",button_text = "Add Income")],
-            [sg.Text(text ="Filter"), sg.Input(key = "-DATE_FROM-",default_text=start_date,size = (13, 1),readonly= True),sg.CalendarButton(button_text="#",format=("%d-%m-%Y")), sg.Input(key = "-DATE_TO-",default_text=current_date, size = (13, 1), readonly= True), sg.CalendarButton(button_text="#",format=("%d-%m-%Y")), sg.Button(key = "-BUTON_FILTER-",button_text ="Apply Filters"), sg.Text(text = "Start date must be later than the end date",key= "-FILTER_DATES_ERR_MESSAGE-",visible= False,background_color= "red", text_color= "white")],
+            [sg.Text(text ="Filter"), sg.Input(key = "-DATE_FROM-",default_text=start_date,size = (13, 1),readonly= True),sg.CalendarButton(button_text="#",format=("%d-%m-%Y")), sg.Input(key = "-DATE_TO-",default_text=current_date, size = (13, 1), readonly= True), sg.CalendarButton(button_text="#",format=("%d-%m-%Y")), sg.Button(key = "-BUTTON_FILTER-",button_text ="Apply Filters"), sg.Text(text = "Start date must be later than the end date",key= "-FILTER_DATES_ERR_MESSAGE-",visible= False,background_color= "red", text_color= "white")],
             [sg.Text("Movements")],
-            [sg.Table(key = "-TABLE_MOVMENTS-",values= sort_list_of_list(filtered_movement_data), headings= movement_data[0], auto_size_columns=True, display_row_numbers= False, justification='left', size= (170,18), vertical_scroll_only= True, max_col_width=40)],
+            [sg.Table(key = "-TABLE_MOVMENTS-",values= sort_list_of_list(FinanceManager.convert_to_list_of_lists(filtered_movement_data)), headings= finance_manager.movements_headers, auto_size_columns=True, display_row_numbers= False, justification='left', size= (170,18), vertical_scroll_only= True, max_col_width=40)],
         ]
 
         window = sg.Window("Finance Manager", layout)
@@ -30,36 +23,31 @@ class Interface:
         while True:
             event, values = window.read()
             if event == "-BUTTON_ADD_CAT-":
-                self.open_add_category_window()
-                self.__data.save_csv(False)
+                self.open_add_category_window(finance_manager= finance_manager)
             if event == "-BUTTON_ADD_MOV_EXP-":
-                self.open_add_movement_window()
-                self.__data.save_csv()
-                self.filter_movents_grid(window)
+                self.open_add_movement_window(finance_manager= finance_manager)
+                window["-BUTTON_FILTER-"].click()
             if event == "-BUTTON_ADD_MOV_INC-":
-                self.open_add_movement_window(False)
-                self.__data.save_csv()
-                self.filter_movents_grid(window)
-            if event == "-BUTON_FILTER-":
-                self.filter_movents_grid(window)
+                self.open_add_movement_window(False, finance_manager= finance_manager)
+                window["-BUTTON_FILTER-"].click()
+            if event == "-BUTTON_FILTER-":
+                self.filter_movents_grid(window, finance_manager)
             if event == sg.WINDOW_CLOSED:
                 break
         window.close()
 
-    def filter_movents_grid(self, window):
-        movement_data = convert_list_of_lists(self.__data.movements_data)
-        movement_data[1] = format_list_to_money(movement_data[1])
+    def filter_movents_grid(self, window, finance_manager = FinanceManager()):
         from_date = window["-DATE_FROM-"].get()
         to_date = window["-DATE_TO-"].get()
+        filtered_movement_data = finance_manager.filter_by_date(from_date, to_date)
         if compare_dates(to_date, from_date):
             window["-FILTER_DATES_ERR_MESSAGE-"].update(visible = False)
-            filtered_movement_data = filter_by_date(movement_data[1], from_date, to_date)
-            window["-TABLE_MOVMENTS-"].update(values= sort_list_of_list(sort_list_of_list(filtered_movement_data)))
+            window["-TABLE_MOVMENTS-"].update(values= sort_list_of_list(FinanceManager.convert_to_list_of_lists(filtered_movement_data)))
         else:
             window["-FILTER_DATES_ERR_MESSAGE-"].update(visible = True)
 
-    def open_add_category_window(self):
 
+    def open_add_category_window(self, finance_manager = FinanceManager()):
         layout = [
             [sg.Text(text = "Category Name"),sg.Input(key = "-CATEGORY_NAME-",size = (15, 1), enable_events= True)],
             [sg.Text(text = "Category Type"),sg.Radio(key = "-CAT_TYPE_EXP-",group_id = "CAT_TYPE", text= "Expense",default= True),sg.Radio(key = "-CAT_TYPE_INC-",group_id = "CAT_TYPE", text= "Income")],
@@ -78,7 +66,7 @@ class Interface:
                 category_name = window["-CATEGORY_NAME-"].get()
                 if category_name != "":
                     category_type = "Expense" if window["-CAT_TYPE_EXP-"].get() else "Income"
-                    self.__data.add_category(category_name,category_type)
+                    finance_manager.add_category(category_name,category_type)
                     break
                 else:
                     window["-CATEGORY_NAME-"].update(background_color = "red")
@@ -86,14 +74,16 @@ class Interface:
                 break
         window.close()
 
-    def open_add_movement_window(self,isExpense = True):
+    def open_add_movement_window(self,isExpense = True, finance_manager = FinanceManager()):
         
         if isExpense:
-            category_data_filtered_by_type = list(filter(lambda x: x["Type"] == "Expense", self.__data.category_data))
+            category_data_filtered_by_type = FinanceManager.convert_to_list_of_lists(finance_manager.get_expenses_categories(),False)
         else:
-            category_data_filtered_by_type = list(filter(lambda x: x["Type"] == "Income", self.__data.category_data))
+            category_data_filtered_by_type = FinanceManager.convert_to_list_of_lists(finance_manager.get_income_categories(),False)
 
-        category_data = list(map(lambda x: x[1],convert_list_of_lists(category_data_filtered_by_type)[1]))
+        category_data = list(map(lambda x: x[1], category_data_filtered_by_type))
+
+        category_type = "Expense" if isExpense else "Income"
 
         if category_data == []:
                 error_visible = True
@@ -102,7 +92,7 @@ class Interface:
 
         layout = [
             [sg.Text(text = "There are no categories available.",key= "-NO_CAT_ERR_MESSAGE-",visible= error_visible,background_color= "red", text_color= "white")],
-            [sg.Text(text = "Category *"),sg.Combo(key = "-CATEGORY_NAME-",readonly = True, values= category_data, size = (15, 1),enable_events = True),sg.Text(text = "Type"),sg.Input(key = "-CAT_TYPE-", size = (15, 1),readonly = True)],
+            [sg.Text(text = "Category *"),sg.Combo(key = "-CATEGORY_NAME-",readonly = True, values= category_data, size = (15, 1),enable_events = True),sg.Text(text = "Type"),sg.Input(key = "-CAT_TYPE-", size = (15, 1),readonly = True, default_text= category_type)],
             [sg.Text(text = "Description *"),sg.Input(key = "-DESCRIP-", size = (38, 1),enable_events = True)],
             [sg.Text(text = "Amount *"),sg.Input(key = "-AMOUNT-", size = (15, 1), enable_events = True), sg.Text(text = "Date"),sg.Input(key = "-DATE-", size = (15, 1),readonly = True,default_text= get_today_date()),sg.CalendarButton(button_text="#",format=("%d-%m-%Y"))],
             [sg.Button(key = "-BUTTON_CAT_ADD-", button_text = "Add",disabled= error_visible)]
@@ -113,10 +103,7 @@ class Interface:
         while True:
             event, values = window.read()
             if event == "-CATEGORY_NAME-":
-                category_type = list(filter(lambda x: x["Category"] == window["-CATEGORY_NAME-"].get(), category_data_filtered_by_type))[0]["Type"]
                 window["-CATEGORY_NAME-"].update(background_color = "white")
-                window["-CAT_TYPE-"].update(value = category_type )
-
             if event == "-DESCRIP-":
                 window["-DESCRIP-"].update(background_color = "white")
 
@@ -131,12 +118,11 @@ class Interface:
 
             if event == "-BUTTON_CAT_ADD-":
                 category_name = window["-CATEGORY_NAME-"].get()
-                category_type = window["-CAT_TYPE-"].get()
                 description = window["-DESCRIP-"].get()
                 amount = window["-AMOUNT-"].get()
                 date = window["-DATE-"].get()
                 if(category_name != "" and amount != "" and description != ""):
-                    self.__data.add_movement(category_name,category_type,amount,description,date)
+                    finance_manager.add_movement(category_name,amount,description,date)
                     break
                 else:
                     if category_name == "":

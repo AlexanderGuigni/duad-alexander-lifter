@@ -60,3 +60,6 @@ Id,Category,Type,Amount,Description,Date
 60,Healthcare,Expense,98000,Blood exam,29-10-2025
 61,Transportation,Expense,520000,Plane ticket to Texas,03-11-2025
 62,Gifts,Income,75000,Company gift card,03-11-2025
+63,Clothing,Expense,10000,short,10-11-2025
+64,Clothing,Expense,75000,snikers,10-11-2025
+65,Education,Expense,1500000,Python course,10-11-2025

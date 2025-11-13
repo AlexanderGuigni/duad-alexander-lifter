@@ -19,75 +19,6 @@ def test_convert_string_to_date_wrong_format():
         convert_string_to_date(my_date)
     
 
-def test_filter_by_date_with_string_dates():
-    #Arrage
-    movement_data = [['20', 'Pet Care', 'Expense', '₡4000.00', 'Dog grooming', '19-10-2025'],['19', 'Car', 'Expense', '₡32000.00', 'Gas', '30-10-2025']]
-    intial_date = "28-10-2025"
-    final_date = "31-10-2025"
-    #Action
-    res = filter_by_date(movement_data, intial_date, final_date)
-    #Assert
-    assert(res == [['19', 'Car', 'Expense', '₡32000.00', 'Gas', '30-10-2025']])
-
-
-def test_filter_by_date_with_date_dates():
-    #Arrage
-    movement_data = [['20', 'Pet Care', 'Expense', '₡4000.00', 'Dog grooming', '19-10-2025'],['19', 'Car', 'Expense', '₡32000.00', 'Gas', '30-10-2025']]
-    intial_date = datetime.strptime("28-10-2025", "%d-%m-%Y").date()
-    final_date = datetime.strptime("31-10-2025", "%d-%m-%Y").date()
-    #Action
-    res = filter_by_date(movement_data, intial_date, final_date)
-    #Assert
-    assert(res == [['19', 'Car', 'Expense', '₡32000.00', 'Gas', '30-10-2025']])
-
-
-def test_filter_by_date_an_empty_list():
-    #Arrage
-    movement_data = []
-    intial_date = "28-10-2025"
-    final_date = "31-10-2025"
-    #Action
-    res = filter_by_date(movement_data, intial_date, final_date)
-    #Assert
-    assert(res == [])
-
-
-def test_convert_list_of_lists():
-    #Arrange
-    dictionary_list = [{'Id': '2', 'Category': 'Housing', 'Type': 'Expense', 'Amount': '750', 'Description': 'Rent payment', 'Date': '01-10-2025'},{'Id': '3', 'Category': 'Transportation', 'Type': 'Expense', 'Amount': '45', 'Description': 'Gas refill', 'Date': '02-10-2025'},{'Id': '4', 'Category': 'Food', 'Type': 'Expense', 'Amount': '120', 'Description': 'Grocery shopping', 'Date': '03-10-2025'}]
-    #Action
-    res = convert_list_of_lists(dictionary_list)
-    #Assert
-    assert(res == [['Id', 'Category', 'Type', 'Amount', 'Description', 'Date'],[['2', 'Housing', 'Expense', '750', 'Rent payment', '01-10-2025'], ['3', 'Transportation', 'Expense', '45', 'Gas refill', '02-10-2025'], ['4', 'Food', 'Expense', '120', 'Grocery shopping', '03-10-2025']]])
-
-
-def test_convert_list_of_lists_empty_list():
-    #Arrange
-    dictionary_list = []
-    #Action
-    res = convert_list_of_lists(dictionary_list)
-    #Assert
-    assert(res == [[],[]])
-
-
-def test_format_list_to_money():
-    #Arrage
-    movements = [['2', 'Housing', 'Expense', '750', 'Rent payment', '01-10-2025'], ['3', 'Transportation', 'Expense', '45', 'Gas refill', '02-10-2025'], ['4', 'Food', 'Expense', '120', 'Grocery shopping', '03-10-2025']]
-    #Action
-    res = format_list_to_money(movements)
-    #Assert
-    assert(res == [['2', 'Housing', 'Expense', '₡750.00', 'Rent payment', '01-10-2025'], ['3', 'Transportation', 'Expense', '₡45.00', 'Gas refill', '02-10-2025'], ['4', 'Food', 'Expense', '₡120.00', 'Grocery shopping', '03-10-2025']])
-
-
-def test_format_list_to_money_empty_list():
-    #Arrage
-    movements = []
-    #Action
-    res = format_list_to_money(movements)
-    #Assert
-    assert(res == [])
-
-
 def test_format_to_money_no_decimal():
     #Arrage
     amount = "750"
@@ -103,3 +34,73 @@ def test_format_to_money_with_decimal():
     res = format_to_money(amount, "₡")
     #Assert
     assert(res == "₡750.25")
+
+
+def test_sort_list_of_list():
+    #Arrange
+    my_list = [
+        [1, "Category1", "Expense", "Desc1", "100.00", "12-10-2023"],
+        [2, "Category2", "Income", "Desc2", "200.00", "15-11-2023"],
+        [3, "Category3", "Expense", "Desc3", "150.00", "10-09-2023"],
+        [4, "Category4", "Income", "Desc4", "250.00", "15-11-2023"]
+    ]
+    #Action
+    res = sort_list_of_list(my_list)
+    #Assert
+    expected = [
+        [4, "Category4", "Income", "Desc4", "250.00", "15-11-2023"],
+        [2, "Category2", "Income", "Desc2", "200.00", "15-11-2023"],
+        [1, "Category1", "Expense", "Desc1", "100.00", "12-10-2023"],
+        [3, "Category3", "Expense", "Desc3", "150.00", "10-09-2023"]
+    ]
+    assert(res == expected)
+
+
+def test_sort_list_of_list_empty_list():
+    #Arrange
+    my_list = []
+    #Action
+    res = sort_list_of_list(my_list)
+    #Assert
+    expected = []
+    assert(res == expected)
+
+
+def test_sort_list_of_list_single_element():
+    #Arrange
+    my_list = [[1, "Category1", "Expense", "Desc1", "100.00", "12-10-2023"]]
+    #Action
+    res = sort_list_of_list(my_list)
+    #Assert
+    expected = [[1, "Category1", "Expense", "Desc1", "100.00", "12-10-2023"]]
+    assert(res == expected)
+
+
+def test_compare_dates_initial_greater():
+    #Arrange
+    initial_date = "15-11-2023"
+    final_date = "12-10-2023"
+    #Action
+    res = compare_dates(initial_date, final_date)
+    #Assert
+    assert(res == True)
+
+
+def test_compare_dates_initial_equal():
+    #Arrange
+    initial_date = "12-10-2023"
+    final_date = "12-10-2023"
+    #Action
+    res = compare_dates(initial_date, final_date)
+    #Assert
+    assert(res == True)
+
+
+def test_compare_dates_initial_less():
+    #Arrange
+    initial_date = "10-09-2023"
+    final_date = "12-10-2023"
+    #Action
+    res = compare_dates(initial_date, final_date)
+    #Assert
+    assert(res == False)
