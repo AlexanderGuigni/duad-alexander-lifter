@@ -40,7 +40,7 @@ class Interface:
         from_date = window["-DATE_FROM-"].get()
         to_date = window["-DATE_TO-"].get()
         filtered_movement_data = finance_manager.filter_by_date(from_date, to_date)
-        if compare_dates(to_date, from_date):
+        if compare_dates(from_date, to_date):
             window["-FILTER_DATES_ERR_MESSAGE-"].update(visible = False)
             window["-TABLE_MOVMENTS-"].update(values= sort_list_of_list(FinanceManager.convert_to_list_of_lists(filtered_movement_data)))
         else:
@@ -94,7 +94,7 @@ class Interface:
             [sg.Text(text = "There are no categories available.",key= "-NO_CAT_ERR_MESSAGE-",visible= error_visible,background_color= "red", text_color= "white")],
             [sg.Text(text = "Category *"),sg.Combo(key = "-CATEGORY_NAME-",readonly = True, values= category_data, size = (15, 1),enable_events = True),sg.Text(text = "Type"),sg.Input(key = "-CAT_TYPE-", size = (15, 1),readonly = True, default_text= category_type)],
             [sg.Text(text = "Description *"),sg.Input(key = "-DESCRIP-", size = (38, 1),enable_events = True)],
-            [sg.Text(text = "Amount *"),sg.Input(key = "-AMOUNT-", size = (15, 1), enable_events = True), sg.Text(text = "Date"),sg.Input(key = "-DATE-", size = (15, 1),readonly = True,default_text= get_today_date()),sg.CalendarButton(button_text="#",format=("%d-%m-%Y"))],
+            [sg.Text(text = "Amount *"),sg.Input(key = "-AMOUNT-", size = (15, 1), enable_events = True), sg.Text(text = "Date"),sg.Input(key = "-DATE-", size = (15, 1),readonly = True,default_text= get_today_date(),enable_events = True),sg.CalendarButton(key="-DATE_CAL-",button_text="#",format=("%d-%m-%Y"))],
             [sg.Button(key = "-BUTTON_CAT_ADD-", button_text = "Add",disabled= error_visible)]
         ]
 
@@ -106,7 +106,8 @@ class Interface:
                 window["-CATEGORY_NAME-"].update(background_color = "white")
             if event == "-DESCRIP-":
                 window["-DESCRIP-"].update(background_color = "white")
-
+            if event == "-DATE-":
+                window["-DATE_CAL-"].update(button_color = ("white", "midnightblue"))
             if event == "-AMOUNT-":
                 window["-AMOUNT-"].update(background_color = "white")
                 amount = window["-AMOUNT-"].get()
@@ -121,7 +122,8 @@ class Interface:
                 description = window["-DESCRIP-"].get()
                 amount = window["-AMOUNT-"].get()
                 date = window["-DATE-"].get()
-                if(category_name != "" and amount != "" and description != ""):
+                date_isvalid = compare_dates(date, get_today_date())
+                if(category_name != "" and amount != "" and description != "" and date_isvalid):
                     finance_manager.add_movement(category_name,amount,description,date)
                     break
                 else:
@@ -131,6 +133,9 @@ class Interface:
                         window["-AMOUNT-"].update(background_color = "red")
                     if description == "":
                         window["-DESCRIP-"].update(background_color = "red")
+                    if not date_isvalid:
+                        print("here")
+                        window["-DATE_CAL-"].update(button_color = ("white", "red"))
             if event == sg.WINDOW_CLOSED:
                 break
         window.close()

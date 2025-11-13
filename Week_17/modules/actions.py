@@ -25,4 +25,4 @@ def compare_dates(initial_date,final_date):
         initial_date = convert_string_to_date(initial_date)
     if not isinstance(final_date, date):
         final_date = convert_string_to_date(final_date)
-    return True if initial_date >= final_date else False
+    return True if initial_date <= final_date else False
