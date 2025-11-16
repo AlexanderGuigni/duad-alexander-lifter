@@ -20,6 +20,5 @@ Id,Category,Type
 20,Pet Care,Expense
 21,Rent Outcome,Expense
 22,Pet care,Expense
-23,Test Exp Cat 001,Expense
-24,Test Cate Inc,Income
-25,   ,Expense
+23,Other Income,Income
+24,Other Expense,Expense

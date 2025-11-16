@@ -95,7 +95,7 @@ class Interface:
             [sg.Text(text = "Category *"),sg.Combo(key = "-CATEGORY_NAME-",readonly = True, values= category_data, size = (15, 1),enable_events = True),sg.Text(text = "Type"),sg.Input(key = "-CAT_TYPE-", size = (15, 1),readonly = True, default_text= category_type)],
             [sg.Text(text = "Description *"),sg.Input(key = "-DESCRIP-", size = (38, 1),enable_events = True)],
             [sg.Text(text = "Amount *"),sg.Input(key = "-AMOUNT-", size = (15, 1), enable_events = True), sg.Text(text = "Date"),sg.Input(key = "-DATE-", size = (15, 1),readonly = True,default_text= get_today_date(),enable_events = True),sg.CalendarButton(key="-DATE_CAL-",button_text="#",format=("%d-%m-%Y"))],
-            [sg.Button(key = "-BUTTON_CAT_ADD-", button_text = "Add",disabled= error_visible)]
+            [sg.Button(key = "-BUTTON_CAT_ADD-", button_text = "Add",disabled= error_visible),sg.Text(text = "Ivalid data.",key= "-EMPTY_ERROR-",visible= False,background_color= "red", text_color= "white")]
         ]
 
         window = sg.Window(title= "Add Movement", layout=layout, modal= True)
@@ -104,12 +104,16 @@ class Interface:
             event, values = window.read()
             if event == "-CATEGORY_NAME-":
                 window["-CATEGORY_NAME-"].update(background_color = "white")
+                window["-EMPTY_ERROR-"].update(visible = False)
             if event == "-DESCRIP-":
                 window["-DESCRIP-"].update(background_color = "white")
+                window["-EMPTY_ERROR-"].update(visible = False)
             if event == "-DATE-":
                 window["-DATE_CAL-"].update(button_color = ("white", "midnightblue"))
+                window["-EMPTY_ERROR-"].update(visible = False)
             if event == "-AMOUNT-":
                 window["-AMOUNT-"].update(background_color = "white")
+                window["-EMPTY_ERROR-"].update(visible = False)
                 amount = window["-AMOUNT-"].get()
                 try:
                     amount = float(amount)
@@ -123,7 +127,7 @@ class Interface:
                 amount = window["-AMOUNT-"].get()
                 date = window["-DATE-"].get()
                 date_isvalid = compare_dates(date, get_today_date())
-                if(category_name != "" and amount != "" and description != "" and date_isvalid):
+                if(category_name.strip() != "" and amount.strip() != "" and description.strip() != "" and date_isvalid):
                     finance_manager.add_movement(category_name,amount,description,date)
                     break
                 else:
@@ -136,6 +140,7 @@ class Interface:
                     if not date_isvalid:
                         print("here")
                         window["-DATE_CAL-"].update(button_color = ("white", "red"))
+                    window["-EMPTY_ERROR-"].update(visible = True)
             if event == sg.WINDOW_CLOSED:
                 break
         window.close()
