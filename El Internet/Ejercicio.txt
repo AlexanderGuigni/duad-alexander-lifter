@@ -1,0 +1,96 @@
+Ejercicios:
+1. Pasos a apaso de lo que sucede desde cuendo el usuario escribre www.youtube.com desde un navegador web hasta que el video se reproduce en la pantalla.
+
+Respuesta:
+- El usuario escribe "www.youtube.com" en la barra de direcciones del navegador y presiona Enter.
+- El navegador envia una solicitud al DNS (Servidor de Nombres de Dominio) para resolver el nombre de dominio "www.youtube.com" a una dirección IP.
+- El DNS retorna la IP publica del servidor de YouTube
+- El navegador envia una solicitud HTTP a la IP obtenida
+- El servidor de YouTube recibe la solicitud y procesa la petición
+- El servidor de YouTube envía los archivos HTML, CSS y JavaScript necesarios para cargar la página
+- El navegador recibe los archivos y comienza a renderizar la página web
+- El navegador ejecuta el código JavaScript para cargar los videos y demás elementos de la página
+- El usuario selecciona un video y hace clic en él
+- El navegador envía una solicitud al servidor de YouTube para obtener el video seleccionado
+- El servidor de YouTube envía el archivo de video al navegador
+- El navegador comienza a reproducir el video en la pantalla del usuario.
+
+Ver diagrama adjunto: Diagrama del Proceso de visualización  de video de youtube.md
+
+
+2. Frontend y Backend en acción
+Suponga que está construyendo una app web para agendar citas médicas.
+>Indique qué parte del sistema correspondería al frontend y cuál al backend.
+>Mencione tres tecnologías posibles para cada uno.
+>Explique brevemente cómo el frontend se comunicaría con el backend (mencione los conceptos de API, HTTP y request/response).
+
+Respuesta:
+- Frontend: La parte del sistema que el usuario ve e interactúa directamente, como la interfaz para agendar citas médicas.
+- Tecnologías posibles: HTML/CSS, JavaScript, Bootstrap.
+- Backend: La parte del sistema que maneja la lógica de negocio, la base de datos y la comunicación con el frontend.
+- Tecnologías posibles: Python, Java, PHP.
+- Comunicación entre frontend y backend: El frontend se comunicaría con el backend a través de una API (Interfaz de Programación de Aplicaciones) utilizando el protocolo HTTP. Cuando el usuario realiza una acción en la interfaz (por ejemplo, agendar una cita), el frontend envía una solicitud (request) HTTP al backend. El backend procesa esta solicitud, realiza las operaciones necesarias (como guardar la cita en la base de datos) y luego envía una respuesta (response) HTTP de vuelta al frontend, confirmando que la cita ha sido agendada exitosamente o proporcionando cualquier información adicional necesaria.
+
+3. REST vs SOAP vs GraphQL
+>Comparar estas opciones según formato de datos, flexibilidad, dificultad de implementación y uso actual, para entender cuándo conviene cada una.
+>Cómo completar la tabla:
+- Usa términos concisos (p. ej., “JSON/XML” en formato de datos).
+- En “nivel de flexibilidad”, piensa: ¿quién controla mejor lo que se envía/recibe, cliente o servidor?
+- En “dificultad de implementación”, considera curva de aprendizaje, herramientas y mantenimiento.
+- En “uso actual”, valora su presencia en proyectos modernos (Alta/Media/Baja).
+
+Respuesta: Ajunto la imagen con la tabla comparativa: Tabla_Tipos_de_API.png
+
+¿Cuál considera más apropiada para una startup moderna que desarrolla un sistema de reservas en línea? ¿Por qué?
+
+Respuesta:
+REST sería la opción más apropiada. 
+- Fácil de implementar y ampliamente soportado.
+- Escalable y bien documentado, con gran comunidad.
+- Ideal para sistemas de reservas donde los recursos (usuarios, reservas, pagos) se modelan como endpoints.
+- Bajo costo de adopción.
+- Compatible con la mayoría de frameworks y lenguajes.
+- Integración sencilla con aplicaciones móviles y web
+
+4. Explorando APIs con Postman
+>Parte 1: Selección de la API
+ - Busca una API pública gratuita (sin autenticación obligatoria o con token gratuito).
+        Por ejemplo podrías utilizar: PokéAPI
+ - Escribe en tu documento: Nombre de la API y una breve descripción de lo que ofrece.
+
+Respuesta:
+- Nombre de la API: Restfull API
+- Descripción: API REST real, lista para gestionar tus solicitudes HTTP las 24 horas del día, los 7 días de la semana, de forma gratuita. Se puede utilizar para tus proyectos de demostración, pruebas, aprendizaje o incluso para formar a otras personas. Esta API REST es compatible con los principales métodos HTTP, como GET, POST, PUT, DELETE y PATCH.
+
+>Parte 2: Configuración en Postman 
+ Crea una nueva colección en Postman con el nombre de la API.
+    -Agrega al menos 3 tipos de solicitudes:
+        *GET → obtener información (por ejemplo, lista o detalle de un elemento).
+        *POST → enviar datos (por ejemplo, crear un recurso).
+        *PUT/PATCH o DELETE → actualizar o eliminar un recurso (si la API lo permite).
+    -Si la API usa parámetros o tokens, configura las variables necesarias en la pestaña Environment.
+
+Respuesta: Colección creada en Postman. Se adjuntó el export de la colección de Postman.
+
+>Parte 3: Ejecución y análisis
+Ejecuta cada solicitud y verifica:
+    -Código de estado (200, 404, 500, etc.).
+    -Cuerpo de la respuesta (JSON o texto).
+    -Headers relevantes (por ejemplo: Content-Type, Authorization).
+    -Guarda las respuestas en tu colección.
+
+Respuesta: Se han ejecutado las solicitudes y verificado los códigos de estado, cuerpos de respuesta y headers relevantes. Las respuestas se han ajuntado.
+
+
+>Parte 4: Explicación técnica
+Crea un archivo README.md (o documento de texto) que incluya:
+    -Descripción general de la API elegida.
+    -Explicación de cada solicitud:
+        -Método HTTP usado.
+        -Endpoint.
+        -Parámetros o cuerpo de la solicitud.
+        -Descripción breve de la respuesta.
+        -Ejemplo de código o fragmento JSON con la respuesta.
+    -Qué aprendiste del proceso.
+
+Respuesta: README.md creado con la información solicitada.
