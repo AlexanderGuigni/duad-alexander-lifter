@@ -1,5 +1,5 @@
 CREATE TABLE Users (
-    Id BIGINT PRIMARY KEY ,
+    Id BIGINT PRIMARY KEY AUTO_INCREMENT,
     Full_Name VARCHAR(50) NOT NULL UNIQUE,
     Email VARCHAR(100) NOT NULL UNIQUE,
     Registration_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -14,14 +14,14 @@ CREATE TABLE Products (
 );
 
 CREATE TABLE ShoppingCart (
-    Id BIGINT PRIMARY KEY ,
+    Id BIGINT PRIMARY KEY AUTO_INCREMENT,
     User_Id BIGINT,
     Total_Amount DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (User_Id) REFERENCES Users(Id)
 );
 
 CREATE TABLE ShoppingCartDetails (
-    Id BIGINT PRIMARY KEY ,
+    Id BIGINT PRIMARY KEY AUTO_INCREMENT,
     Cart_Id BIGINT,
     Product_Code VARCHAR(15),
     Quantity INT NOT NULL,
@@ -31,13 +31,13 @@ CREATE TABLE ShoppingCartDetails (
 );
 
 CREATE TABLE PaymentMethods (
-    Id BIGINT PRIMARY KEY ,
+    Id BIGINT PRIMARY KEY AUTO_INCREMENT,
     Description VARCHAR(50) NOT NULL,
     Bank_Name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Invoice (
-    Id BIGINT PRIMARY KEY ,
+    Id BIGINT PRIMARY KEY AUTO_INCREMENT,
     User_Id BIGINT,
     Payment_Method_Id BIGINT,
     Purchase_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -47,7 +47,7 @@ CREATE TABLE Invoice (
 );
 
 CREATE TABLE InvoiceDetails (
-    Id BIGINT PRIMARY KEY ,
+    Id BIGINT PRIMARY KEY AUTO_INCREMENT,
     Invoice_Id BIGINT,
     Product_Code VARCHAR(15),
     Quantity INT NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE InvoiceDetails (
 );
 
 CREATE TABLE Reviews (
-    Id BIGINT PRIMARY KEY ,
+    Id BIGINT PRIMARY KEY AUTO_INCREMENT,
     User_Id BIGINT,
     Product_Code VARCHAR(15),
     Rating INT CHECK (Rating >= 1 AND Rating <= 5),
