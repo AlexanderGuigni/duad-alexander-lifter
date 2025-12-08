@@ -1,0 +1,19 @@
+Pregunta Reflexiva:
+
+¿Cada factura debe tener relación con un usuario, o puede existir una factura sin cuenta?
+ -Respuesta:
+En este caso la factura se relaciona con el usuario por medio del carrito de compras.
+La relacion se hace a traves del email del usuario que se encuentra en el carrito de compras y es unico para cada usuario. Por lo tanto, cada factura debe tener una relacion con un usuario.
+
+¿Necesito tabla cruz? ¿por que?
+-Respuesta:
+No, no necesito una tabla cruz en este caso porque la relación entre facturas y usuarios es directa a través del email del carrito de compras.
+
+¿Una reseña puede existir sin un producto o sin un usuario?
+-Respuesta:
+No, una reseña no puede existir sin un producto o sin un usuario. Cada reseña debe estar asociada a un producto específico y a un usuario que la haya escrito.
+
+
+¿Cada factura debe tener exactamente un método de pago, o podría haber más de uno?
+-Respuesta:
+Cada factura debe tener exactamente un método de pago. Esto se debe a que una factura representa una transacción específica y, por lo general, se asocia con un único método de pago para esa transacción.
