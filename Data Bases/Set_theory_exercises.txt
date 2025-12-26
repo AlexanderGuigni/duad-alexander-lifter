@@ -9,4 +9,4 @@ Even U Odd = All
 Even ∩ Odd = ∅
 All - Odd = Even
 C(Even) = Odd
-C(Odd-All) = ∅
+C(Odd-All) = Even
