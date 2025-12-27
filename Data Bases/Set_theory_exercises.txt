@@ -9,4 +9,5 @@ Even U Odd = All
 Even ∩ Odd = ∅
 All - Odd = Even
 C(Even) = Odd
-C(Odd-All) = Even
+C(Odd-All) = All: Al restar a Odd lo que está en All, no queda nada, por lo tanto su complemento es todo el conjunto All.
+
