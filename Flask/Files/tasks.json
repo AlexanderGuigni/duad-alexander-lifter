@@ -30,9 +30,15 @@
         "status": "Por Hacer"
     },
     {
-        "Title": "Implementar autenticaci\u00f3n de usuarios",
-        "Description": "Agregar sistema de login y registro con JWT",
-        "Status": "Por Hacer",
+        "title": "Implementar autenticaci\u00f3n de usuarios",
+        "description": "Agregar sistema de login y registro con JWT",
+        "status": "Por Hacer",
         "id": 6
+    },
+    {
+        "title": "Implementar notificaciones",
+        "description": "Agregar sistema de notificaciones para tareas vencidas",
+        "status": "En Progreso",
+        "id": 7
     }
 ]
