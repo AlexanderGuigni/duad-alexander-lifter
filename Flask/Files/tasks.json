@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "title": "Configurar entorno de desarrollo",
+        "description": "Instalar Flask y configurar el entorno virtual",
+        "status": "Completada"
+    },
+    {
+        "id": 2,
+        "title": "Dise\u00f1ar la base de datos",
+        "description": "Crear el esquema de la base de datos para las tareas",
+        "status": "En Progreso"
+    },
+    {
+        "id": 3,
+        "title": "Implementar API REST",
+        "description": "Desarrollar endpoints para CRUD de tareas",
+        "status": "Por Hacer"
+    },
+    {
+        "id": 4,
+        "title": "Crear interfaz de usuario",
+        "description": "Dise\u00f1ar y desarrollar el frontend con HTML/CSS/JS",
+        "status": "Por Hacer"
+    },
+    {
+        "id": 5,
+        "title": "Escribir pruebas unitarias",
+        "description": "Implementar tests para validar funcionalidad",
+        "status": "Por Hacer"
+    },
+    {
+        "title": "Implementar autenticaci\u00f3n de usuarios",
+        "description": "Agregar sistema de login y registro con JWT",
+        "status": "Por Hacer",
+        "id": 6
+    },
+    {
+        "title": "Implementar notificaciones",
+        "description": "Agregar sistema de notificaciones para tareas vencidas",
+        "status": "En Progreso",
+        "id": 7
+    }
+]
