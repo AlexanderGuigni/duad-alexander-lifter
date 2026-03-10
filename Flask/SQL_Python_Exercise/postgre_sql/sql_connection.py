@@ -48,3 +48,21 @@ class DatabaseConnection:
             self.connection.rollback()
             print(f"An error occurred while executing the query: {e}")
             raise
+        finally:
+            self.disconnect()
+
+    def execute_multiple_queries(self, *args):
+        if self.connection is None:
+            return None
+        try:
+            for query, params in args:
+                cursor = self.connection.cursor()
+                cursor.execute(query, params)
+                cursor.close()
+            self.connection.commit()
+        except Exception as e:
+            self.connection.rollback()
+            print(f"An error occurred while executing the query: {e}")
+            raise
+        finally:
+            self.disconnect()
