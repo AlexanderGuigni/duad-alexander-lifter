@@ -1,66 +1,65 @@
 import sqlalchemy
-from sqlalchemy import Column, Integer, MetaData, String, DateTime, Boolean
-from connection import DatabaseConnection  
+from sqlalchemy import Column, ForeignKey, Integer, MetaData, String, DateTime, Boolean 
 
 metadata_obj = MetaData()
 
+user_table = sqlalchemy.Table(
+        'users',
+        metadata_obj,
+        Column('id', Integer, primary_key=True),
+        Column('user_name', String(50), unique=True, nullable=False),
+        Column('email', String(120), unique=True, nullable=False),
+        Column('created_at', DateTime, nullable=False),
+        Column('is_active', Boolean, default=True)
+    )
+
+address_table = sqlalchemy.Table(
+        'addresses',
+        metadata_obj,
+        Column('id', Integer, primary_key=True),
+        Column('user_id', Integer, ForeignKey("users.id"), nullable=False),
+        Column('address_line', String(200), nullable=False),
+        Column('city', String(50), nullable=False),
+        Column('state', String(50), nullable=False),
+        Column('zip_code', String(10), nullable=False)
+    )
+
+car_table = sqlalchemy.Table(
+        'cars',
+        metadata_obj,
+        Column('id', Integer, primary_key=True),
+        Column('user_id', Integer, ForeignKey("users.id"), nullable=True),
+        Column('brand', String(50), nullable=False),
+        Column('model', String(50), nullable=False),
+        Column('year', Integer, nullable=False),
+        Column('is_available', Boolean, default=True)
+    )
+
 def create_tables(dbEngine):
-    user_table = sqlalchemy.Table(
-            'users',
-            metadata_obj,
-            Column('id', Integer, primary_key=True),
-            Column('username', String(50), unique=True, nullable=False),
-            Column('email', String(120), unique=True, nullable=False),
-            Column('created_at', DateTime, nullable=False),
-            Column('is_active', Boolean, default=True)
-        )
-
-    address_table = sqlalchemy.Table(
-            'addresses',
-            metadata_obj,
-            Column('id', Integer, primary_key=True),
-            Column('user_id', Integer, nullable=False),
-            Column('address_line', String(200), nullable=False),
-            Column('city', String(50), nullable=False),
-            Column('state', String(50), nullable=False),
-            Column('zip_code', String(10), nullable=False)
-        )
-
-    car_table = sqlalchemy.Table(
-            'cars',
-            metadata_obj,
-            Column('id', Integer, primary_key=True),
-            Column('user_id', Integer, nullable=True),
-            Column('brand', String(50), nullable=False),
-            Column('model', String(50), nullable=False),
-            Column('year', Integer, nullable=False),
-            Column('is_available', Boolean, default=True)
-        )
-
     metadata_obj.create_all(dbEngine)
 
 def insert_initial_data(db_connection):
     initial_users = [
-        {"username": "Alice", "email": "alice@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Bob", "email": "bob@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Charlie", "email": "charlie@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "David", "email": "david@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Eve", "email": "eve@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Frank", "email": "frank@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Grace", "email": "grace@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Heidi", "email": "heidi@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Ivan", "email": "ivan@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Judy", "email": "judy@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Karl", "email": "karl@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Leo", "email": "leo@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Mallory", "email": "mallory@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Nina", "email": "nina@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Oscar", "email": "oscar@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Peggy", "email": "peggy@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Quentin", "email": "quentin@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Rupert", "email": "rupert@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Sybil", "email": "sybil@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"username": "Trent", "email": "trent@example.com", "created_at": "2024-06-01 00:00:00"}
+        {"user_name": "Alice", "email": "alice@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Bob", "email": "bob@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Charlie", "email": "charlie@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "David", "email": "david@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Eve", "email": "eve@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Frank", "email": "frank@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Grace", "email": "grace@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Heidi", "email": "heidi@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Ivan", "email": "ivan@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Judy", "email": "judy@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Karl", "email": "karl@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Leo", "email": "leo@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Mallory", "email": "mallory@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Nina", "email": "nina@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Oscar", "email": "oscar@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Peggy", "email": "peggy@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Quentin", "email": "quentin@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Rupert", "email": "rupert@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Sybil", "email": "sybil@example.com", "created_at": "2024-06-01 00:00:00"},
+        {"user_name": "Trent", "email": "trent@example.com", "created_at": "2024-06-01 00:00:00"}
     ]
     
     insert_users_stmt = metadata_obj.tables['users'].insert().values(initial_users)
@@ -132,7 +131,7 @@ class User:
             return self.db.execute_statement(select_stmt)
         except Exception as e:
             print(f"Error fetching user: {e}")
-            return None
+            raise
         
     def get_users_with_multiple_cars(self):
         try:
@@ -147,43 +146,43 @@ class User:
             return self.db.execute_statement(select_stmt)
         except Exception as e:
             print(f"Error fetching users with multiple cars: {e}")
-            return None
+            raise
 
-    def create_user(self, username, email, created_at, is_active=True):
+    def create_user(self, user_name, email, created_at, is_active=True):
         try:
             insert_stmt = self.metadata.tables['users'].insert().values(
-                username=username,
+                user_name=user_name,
                 email=email,
                 created_at=created_at,
                 is_active=is_active
-            ).returning(self.metadata.tables['users'].c.id, self.metadata.tables['users'].c.username, self.metadata.tables['users'].c.email, self.metadata.tables['users'].c.created_at, self.metadata.tables['users'].c.is_active)
+            ).returning(self.metadata.tables['users'].c.id, self.metadata.tables['users'].c.user_name, self.metadata.tables['users'].c.email, self.metadata.tables['users'].c.created_at, self.metadata.tables['users'].c.is_active)
             return self.db.execute_statement(insert_stmt)
         except Exception as e:
             print(f"Error creating user: {e}")
-            return None
+                
         
     def update_user(self, user_id, **updates):
         try:
             update_stmt = self.metadata.tables['users'].update().where(
                 self.metadata.tables['users'].c.id == user_id
-            ).values(**updates).returning(self.metadata.tables['users'].c.id, self.metadata.tables['users'].c.username, self.metadata.tables['users'].c.email, self.metadata.tables['users'].c.created_at, self.metadata.tables['users'].c.is_active)
+            ).values(**updates).returning(self.metadata.tables['users'].c.id, self.metadata.tables['users'].c.user_name, self.metadata.tables['users'].c.email, self.metadata.tables['users'].c.created_at, self.metadata.tables['users'].c.is_active)
             return self.db.execute_statement(update_stmt)
         except Exception as e:
             print(f"Error updating user: {e}")
-            return None
+            raise
         
     def delete_user(self, user_id):
         try:
             delete_stmt = self.metadata.tables['users'].delete().where(
                 self.metadata.tables['users'].c.id == user_id
-            ).returning("User with id " + str(user_id) + " deleted")
-            return self.db.execute_statement(delete_stmt)
+            )
+            self.db.execute_statement(delete_stmt)
+            return "User with id " + str(user_id) + " deleted"
         except Exception as e:
             print(f"Error deleting user: {e}")
-            return None
+            raise
         
-    @property
-    def addresses(self,user_id):
+    def addresses(self, user_id):
         try:
             select_stmt = self.metadata.tables['addresses'].select().where(
                 self.metadata.tables['addresses'].c.user_id == user_id
@@ -191,10 +190,9 @@ class User:
             return self.db.execute_statement(select_stmt)
         except Exception as e:
             print(f"Error fetching addresses for user: {e}")
-            return None
+            raise   
         
-    @property
-    def cars(self,user_id):
+    def cars(self, user_id):
         try:
             select_stmt = self.metadata.tables['cars'].select().where(
                 self.metadata.tables['cars'].c.user_id == user_id
@@ -202,7 +200,7 @@ class User:
             return self.db.execute_statement(select_stmt)
         except Exception as e:
             print(f"Error fetching cars for user: {e}")
-            return None
+            raise
 
 class Address:
 
@@ -218,7 +216,7 @@ class Address:
             return self.db.execute_statement(select_stmt)
         except Exception as e:
             print(f"Error fetching address: {e}")
-            return None
+            raise
         
     def get_addresses_with_string(self, substring):
         try:
@@ -228,38 +226,49 @@ class Address:
             return self.db.execute_statement(select_stmt)
         except Exception as e:
             print(f"Error fetching addresses with substring '{substring}': {e}")
-            return None
+            raise
         
-    def create_address(self, user_id, address):
+    def create_address(self, user_id, address_line, city, state, zip_code):
         try:
             insert_stmt = self.metadata.tables['addresses'].insert().values(
                 user_id=user_id,
-                address_line=address
-            ).returning(self.metadata.tables['addresses'].c.id, self.metadata.tables['addresses'].c.user_id, self.metadata.tables['addresses'].c.address)
+                address_line=address_line,
+                city=city,
+                state=state,
+                zip_code=zip_code
+            ).returning(
+                self.metadata.tables['addresses'].c.id,
+                self.metadata.tables['addresses'].c.user_id,
+                self.metadata.tables['addresses'].c.address_line,
+                self.metadata.tables['addresses'].c.city,
+                self.metadata.tables['addresses'].c.state,
+                self.metadata.tables['addresses'].c.zip_code
+            )
             return self.db.execute_statement(insert_stmt)
         except Exception as e:
             print(f"Error creating address: {e}")
-            return None
+            raise
         
     def update_address(self, address_id, **updates):
         try:
             update_stmt = self.metadata.tables['addresses'].update().where(
                 self.metadata.tables['addresses'].c.id == address_id
-            ).values(**updates).returning(self.metadata.tables['addresses'].c.id, self.metadata.tables['addresses'].c.user_id, self.metadata.tables['addresses'].c.address)
+            ).values(**updates).returning(self.metadata.tables['addresses'].c.id, self.metadata.tables['addresses'].c.user_id, self.metadata.tables['addresses'].c.address_line, self.metadata.tables['addresses'].c.city, self.metadata.tables['addresses'].c.state, self.metadata.tables['addresses'].c.zip_code)
             return self.db.execute_statement(update_stmt)
         except Exception as e:
             print(f"Error updating address: {e}")
-            return None
+            raise
         
     def delete_address(self, address_id):
         try:
             delete_stmt = self.metadata.tables['addresses'].delete().where(
                 self.metadata.tables['addresses'].c.id == address_id
-            ).returning("Address with id " + str(address_id) + " deleted")
-            return self.db.execute_statement(delete_stmt)
+            )
+            self.db.execute_statement(delete_stmt)
+            return "Address with id " + str(address_id) + " deleted"
         except Exception as e:
             print(f"Error deleting address: {e}")
-            return None
+            raise
         
 class Cars:
 
@@ -275,7 +284,17 @@ class Cars:
                 return self.db.execute_statement(select_stmt)
             except Exception as e:
                 print(f"Error fetching car: {e}")
-                return None
+                raise
+            
+        def get_cars_without_user(self):
+            try:
+                select_stmt = self.metadata.tables['cars'].select().where(
+                    self.metadata.tables['cars'].c.user_id.is_(None)
+                )
+                return self.db.execute_statement(select_stmt)
+            except Exception as e:
+                print(f"Error fetching cars without user: {e}")
+                raise
             
         def create_car(self, brand, model, year, is_available=True, user_id = None):
             try:
@@ -289,7 +308,7 @@ class Cars:
                 return self.db.execute_statement(insert_stmt)
             except Exception as e:
                 print(f"Error creating car: {e}")
-                return None
+                raise
             
         def update_car(self, car_id, **updates):
             try:
@@ -299,14 +318,15 @@ class Cars:
                 return self.db.execute_statement(update_stmt)
             except Exception as e:
                 print(f"Error updating car: {e}")
-                return None
+                raise
             
         def delete_car(self, car_id):
             try:
                 delete_stmt = self.metadata.tables['cars'].delete().where(
                     self.metadata.tables['cars'].c.id == car_id
-                ).returning("Car with id " + str(car_id) + " deleted")
-                return self.db.execute_statement(delete_stmt)
+                )
+                self.db.execute_statement(delete_stmt)
+                return "Car with id " + str(car_id) + " deleted"
             except Exception as e:
                 print(f"Error deleting car: {e}")
-                return None
+                raise

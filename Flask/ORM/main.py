@@ -11,19 +11,18 @@ if __name__ == "__main__":
     # Insert initial data
     insert_initial_data(db_connection)
 
-    # Example usage
     user_model = User(db_connection)
     address_model = Address(db_connection)
     cars_model = Cars(db_connection)
 
     # Create a new user
-    new_user = user_model.create_user(username="Samuel Guigni", email="samuel.guigni@example.com", created_at="2024-06-01 00:00:00")
+    new_user = user_model.create_user(user_name="sguigni", email="samuel.guigni@example.com", created_at="2024-06-01 00:00:00")
     print("New User:", new_user)
 
     # Create an address for the new user
     if new_user:   
         user_id = new_user[0][0]
-        new_address = address_model.create_address(user_id=user_id, address="123 Main St")
+        new_address = address_model.create_address(user_id=user_id, address_line="123 Main St", city="Springfield", state="IL", zip_code="62701")
         print("New Address:", new_address)
 
     # Create a car for the new user
@@ -49,6 +48,7 @@ if __name__ == "__main__":
     print("All Cars:", cars)
 
     # Get cars for a specific user
+    user_id = 3
     user_cars = cars_model.get_car(user_id=user_id)
     print(f"Cars for User ID {user_id}:", user_cars)
 
@@ -57,8 +57,8 @@ if __name__ == "__main__":
     print(f"Addresses for User ID {user_id}:", user_addresses)
 
     # Get cars without an associated user
-    unassociated_cars = cars_model.get_car(user_id=None)
-    print("Cars without an associated user:", unassociated_cars)
+    get_cars_without_user = cars_model.get_cars_without_user()
+    print("Cars without an associated user:", get_cars_without_user)
 
     # Get user with more than 1 car
     users_with_multiple_cars = user_model.get_users_with_multiple_cars()
@@ -68,4 +68,3 @@ if __name__ == "__main__":
     substring = "St"
     addresses_with_substring = address_model.get_addresses_with_string(substring)
     print(f"Addresses containing '{substring}':", addresses_with_substring)
-

@@ -1,13 +1,21 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 class DatabaseConnection:
 
-    __DB_URL = "postgresql://postgres:postgres@localhost:54674/postgres"  # Default database URL 
+    __DB_URL = "postgresql://postgres:postgres@localhost:54674/postgres"
+    __SCHEMA = "orm_schema"
      # Create engine with echo for debugging
 
     def __init__(self):
     
-        self.engine = create_engine(self.__DB_URL, echo=True)
+        self.engine = create_engine(
+            self.__DB_URL,
+            echo=False,
+            connect_args={"options": f"-csearch_path={self.__SCHEMA}"}
+        )
+
+        with self.engine.begin() as connection:
+            connection.execute(text(f"CREATE SCHEMA IF NOT EXISTS {self.__SCHEMA}"))
 
     def execute_statement(self, statement):
         try:
