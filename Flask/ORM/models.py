@@ -1,5 +1,6 @@
 import sqlalchemy
-from sqlalchemy import Column, ForeignKey, Integer, MetaData, String, DateTime, Boolean 
+from sqlalchemy import Column, ForeignKey, Integer, MetaData, String, DateTime, Boolean
+from faker import Faker 
 
 metadata_obj = MetaData()
 
@@ -39,88 +40,65 @@ def create_tables(dbEngine):
     metadata_obj.create_all(dbEngine)
 
 def insert_initial_data(db_connection):
-    initial_users = [
-        {"user_name": "Alice", "email": "alice@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Bob", "email": "bob@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Charlie", "email": "charlie@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "David", "email": "david@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Eve", "email": "eve@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Frank", "email": "frank@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Grace", "email": "grace@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Heidi", "email": "heidi@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Ivan", "email": "ivan@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Judy", "email": "judy@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Karl", "email": "karl@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Leo", "email": "leo@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Mallory", "email": "mallory@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Nina", "email": "nina@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Oscar", "email": "oscar@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Peggy", "email": "peggy@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Quentin", "email": "quentin@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Rupert", "email": "rupert@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Sybil", "email": "sybil@example.com", "created_at": "2024-06-01 00:00:00"},
-        {"user_name": "Trent", "email": "trent@example.com", "created_at": "2024-06-01 00:00:00"}
-    ]
+
+    faker = Faker('en_US')  
+
+    initial_users = []
+
+    for _ in range(20):
+        user_name = faker.user_name()
+        email = faker.email()
+        created_at = faker.date_time_this_decade()
+        initial_users.append({"user_name": user_name, "email": email, "created_at": created_at})
     
     insert_users_stmt = metadata_obj.tables['users'].insert().values(initial_users)
 
-    initial_addresses = [
-        {"user_id": 1, "address_line": "123 Maple St", "city": "Springfield", "state": "IL", "zip_code": "62701"},
-        {"user_id": 2, "address_line": "456 Oak Ave", "city": "Madison", "state": "WI", "zip_code": "53703"},
-        {"user_id": 3, "address_line": "789 Pine Rd", "city": "Austin", "state": "TX", "zip_code": "73301"},
-        {"user_id": 4, "address_line": "101 Cedar Ln", "city": "Miami", "state": "FL", "zip_code": "33101"},
-        {"user_id": 5, "address_line": "202 Elm Blvd", "city": "Seattle", "state": "WA", "zip_code": "98101"},
-        {"user_id": 6, "address_line": "303 Birch St", "city": "Denver", "state": "CO", "zip_code": "80201"},
-        {"user_id": 7, "address_line": "404 Walnut Ave", "city": "Phoenix", "state": "AZ", "zip_code": "85001"},
-        {"user_id": 8, "address_line": "505 Cherry Rd", "city": "Boston", "state": "MA", "zip_code": "02108"},
-        {"user_id": 9, "address_line": "606 Aspen Dr", "city": "Portland", "state": "OR", "zip_code": "97201"},
-        {"user_id": 10, "address_line": "707 Willow Way", "city": "Atlanta", "state": "GA", "zip_code": "30301"},
-        {"user_id": 11, "address_line": "808 Poplar Ct", "city": "Nashville", "state": "TN", "zip_code": "37201"},
-        {"user_id": 12, "address_line": "909 Sycamore Pl", "city": "Dallas", "state": "TX", "zip_code": "75201"},
-        {"user_id": 13, "address_line": "111 Lakeview St", "city": "San Diego", "state": "CA", "zip_code": "92101"},
-        {"user_id": 14, "address_line": "222 Hillcrest Ave", "city": "Charlotte", "state": "NC", "zip_code": "28202"},
-        {"user_id": 15, "address_line": "333 River Rd", "city": "Columbus", "state": "OH", "zip_code": "43215"},
-        {"user_id": 16, "address_line": "444 Sunset Blvd", "city": "Las Vegas", "state": "NV", "zip_code": "88901"},
-        {"user_id": 17, "address_line": "555 Meadow Ln", "city": "Boise", "state": "ID", "zip_code": "83702"},
-        {"user_id": 18, "address_line": "666 Forest Dr", "city": "Burlington", "state": "VT", "zip_code": "05401"},
-        {"user_id": 19, "address_line": "777 Ocean Ave", "city": "Providence", "state": "RI", "zip_code": "02903"},
-        {"user_id": 20, "address_line": "888 Highland Rd", "city": "Cheyenne", "state": "WY", "zip_code": "82001"}
-    ]
+    initial_addresses = []
+
+    for i in range(1, 21):
+        user_id = i
+        address_line = faker.street_address()
+        city = faker.city()
+        state = faker.state_abbr()
+        zip_code = faker.zipcode()
+        initial_addresses.append({"user_id": user_id, "address_line": address_line, "city": city, "state": state, "zip_code": zip_code})
+
 
     insert_addresses_stmt = metadata_obj.tables['addresses'].insert().values(initial_addresses)
 
-    initial_cars = [
-        {"user_id": 1, "brand": "Toyota", "model": "Corolla", "year": 2018, "is_available": True},
-        {"user_id": 2, "brand": "Honda", "model": "Civic", "year": 2019, "is_available": True},
-        {"user_id": 3, "brand": "Ford", "model": "Focus", "year": 2017, "is_available": True},
-        {"user_id": 4, "brand": "Chevrolet", "model": "Malibu", "year": 2020, "is_available": False},
-        {"user_id": 5, "brand": "Nissan", "model": "Sentra", "year": 2021, "is_available": True},
-        {"user_id": 6, "brand": "Hyundai", "model": "Elantra", "year": 2018, "is_available": True},
-        {"user_id": 7, "brand": "Kia", "model": "Forte", "year": 2022, "is_available": False},
-        {"user_id": 8, "brand": "Volkswagen", "model": "Jetta", "year": 2019, "is_available": True},
-        {"user_id": 1, "brand": "Mazda", "model": "3", "year": 2020, "is_available": True},
-        {"user_id": 10, "brand": "Subaru", "model": "Impreza", "year": 2017, "is_available": True},
-        {"user_id": 11, "brand": "BMW", "model": "320i", "year": 2016, "is_available": False},
-        {"user_id": 12, "brand": "Mercedes-Benz", "model": "C200", "year": 2021, "is_available": True},
-        {"user_id": 13, "brand": "Audi", "model": "A4", "year": 2018, "is_available": True},
-        {"user_id": 13, "brand": "Lexus", "model": "IS", "year": 2020, "is_available": False},
-        {"user_id": 13, "brand": "Tesla", "model": "Model 3", "year": 2022, "is_available": True},
-        {"user_id": None, "brand": "Renault", "model": "Clio", "year": 2016, "is_available": True},
-        {"user_id": None, "brand": "Peugeot", "model": "208", "year": 2019, "is_available": True},
-        {"user_id": None, "brand": "Fiat", "model": "Tipo", "year": 2017, "is_available": False},
-        {"user_id": None, "brand": "Skoda", "model": "Octavia", "year": 2021, "is_available": True},
-        {"user_id": None, "brand": "Seat", "model": "Leon", "year": 2018, "is_available": True}
-    ]
+    initial_cars = []
+
+    for i in range(30):
+        user_id = faker.random_element(elements=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, None])
+        brand = faker.random_element(elements=["Toyota", "Honda", "Ford", "Chevrolet", "Nissan", "Hyundai", "Kia", "Volkswagen", "Mazda", "Subaru"])
+        model = faker.word().capitalize()
+        year = faker.year()
+        is_available = faker.boolean()
+        initial_cars.append({"user_id": user_id, "brand": brand, "model": model, "year": year, "is_available": is_available})
 
     insert_cars_stmt = metadata_obj.tables['cars'].insert().values(initial_cars)
 
     db_connection.execute_multiple_statements([insert_users_stmt, insert_addresses_stmt, insert_cars_stmt])
+
 
 class User:
 
     def __init__(self,db_connection):
         self.db = db_connection
         self.metadata = metadata_obj
+
+    def get_info_by_user_id(self, user_id):
+
+        cars = Cars(self.db)
+        addresses = User(self.db)
+        
+        # Get cars for a specific user
+        user_cars = cars.get_car(user_id=user_id)
+        print(f"Cars for User ID {user_id}:", user_cars)
+
+        # Get addresses for a specific user
+        user_addresses = addresses.get_address(user_id=user_id)
+        print(f"Addresses for User ID {user_id}:", user_addresses)
 
 
     def get_user(self, **filters):

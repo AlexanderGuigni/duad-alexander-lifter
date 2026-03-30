@@ -68,3 +68,7 @@ if __name__ == "__main__":
     substring = "St"
     addresses_with_substring = address_model.get_addresses_with_string(substring)
     print(f"Addresses containing '{substring}':", addresses_with_substring)
+
+    # Get caars and addresses for a specific user
+    user_id = 3
+    user_model.get_info_by_user_id(user_id=user_id)
