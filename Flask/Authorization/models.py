@@ -188,7 +188,7 @@ class Invoice:
     
     def delete_invoice(self, invoice_id):
         delete_invoice_query = self.metadata.tables['invoices'].delete().where(self.metadata.tables['invoices'].c.id == invoice_id)
-        self.db.execute_statements(delete_invoice_query)
+        self.db.execute_statement(delete_invoice_query)
 
     def genetate_invoice(self, user_id, product_list):
         total_price = sum([product['price'] * product['quantity'] for product in product_list])
