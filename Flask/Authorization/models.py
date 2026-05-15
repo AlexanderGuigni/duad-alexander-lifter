@@ -200,20 +200,24 @@ class Invoice:
         result = self.db.execute_statement(insert_query)
         invoice_id = result[0][0] if result else None
 
-        if invoice_id:
-            invoice_details_queries = self.create_invoice_details(invoice_id, product_list)
-            stock_update_queries = self.reduce_stock(product_list)
-            all_queries = invoice_details_queries + stock_update_queries
-            self.db.execute_multiple_statements(all_queries)
-        else:
-            self.delete_invoice(invoice_id)
+        try:
+
+            if invoice_id:
+                invoice_details_queries = self.create_invoice_details(invoice_id, product_list)
+                stock_update_queries = self.reduce_stock(product_list)
+                all_queries = invoice_details_queries + stock_update_queries
+                self.db.execute_multiple_statements(all_queries)
+            
+                invoice_query = self.metadata.tables['invoices'].select().where(self.metadata.tables['invoices'].c.id == invoice_id)
+                invoice_result = self.db.execute_statement(invoice_query)
+                result_formatted = {'id': invoice_result[0][0], 'user_id': invoice_result[0][1], 'total_price': invoice_result[0][2], 'created_at': invoice_result[0][3]} if invoice_result else None
+                return result_formatted
+            raise Exception("Invoice ID not found after insertion.")
         
-        if invoice_id:
-            invoice_query = self.metadata.tables['invoices'].select().where(self.metadata.tables['invoices'].c.id == invoice_id)
-            invoice_result = self.db.execute_statement(invoice_query)
-            result_formatted = {'id': invoice_result[0][0], 'user_id': invoice_result[0][1], 'total_price': invoice_result[0][2], 'created_at': invoice_result[0][3]} if invoice_result else None
-            return result_formatted
-        return None
+        except Exception as ex:
+            self.delete_invoice(invoice_id)
+            print(f"System error during the purchase process: {ex}")
+            raise 
     
     def get_invoice_by_id(self, invoice_id):
         invoice_query = self.metadata.tables['invoices'].select().where(self.metadata.tables['invoices'].c.id == invoice_id)
