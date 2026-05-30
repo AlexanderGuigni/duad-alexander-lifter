@@ -1,8 +1,14 @@
 from sqlalchemy import create_engine, text
+import os
 
 class DatabaseConnection:
 
-    __DB_URL = "postgresql://postgres:postgres@localhost:54674/postgres"
+    __DB_HOST = os.getenv("DB_HOST", "localhost")
+    __DB_PORT = os.getenv("DB_PORT", "55432")
+    __DB_USER = os.getenv("DB_USER", "postgres")
+    __DB_PASSWORD = os.getenv("DB_PASSWORD", "postgres")
+    __DB_NAME = os.getenv("DB_NAME", "postgres")
+    __DB_URL = f"postgresql://{__DB_USER}:{__DB_PASSWORD}@{__DB_HOST}:{__DB_PORT}/{__DB_NAME}"
     __SCHEMA = "authorization_schema"
      # Create engine with echo for debugging
 

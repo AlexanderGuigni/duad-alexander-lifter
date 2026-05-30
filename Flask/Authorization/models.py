@@ -79,7 +79,9 @@ class User:
         self.metadata = metadata_obj
 
 
-    def insert_user(self, user_name, password, user_role, email, created_at = datetime.now(), is_active=True):
+    def insert_user(self, user_name, password, user_role, email, created_at = None, is_active=True):
+        if created_at is None:
+            created_at = datetime.now()
         insert_query = self.metadata.tables['users'].insert().values(
             user_name=user_name,
             password=password,
@@ -118,10 +120,12 @@ class Products:
     def get_all_products(self):
         select_query = self.metadata.tables['products'].select()
         result = self.db.execute_statement(select_query)
-        formatted_result = [{'id': row[0], 'product_name': row[1], 'price': row[2], 'stock': row[3], 'created_at': row[4]} for row in result] if result else []
+        formatted_result = [{'id': row[0], 'product_name': row[1], 'price': row[2], 'stock': row[4], 'created_at': row[3]} for row in result] if result else []
         return formatted_result
     
-    def create_product(self, product_name, price, created_at = datetime.now(), stock = 0):
+    def create_product(self, product_name, price, created_at = None, stock = 0):
+        if created_at is None:
+            created_at = datetime.now()
         insert_query = self.metadata.tables['products'].insert().values(
             product_name=product_name,
             price=price,

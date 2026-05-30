@@ -2,20 +2,22 @@ import jwt
 
 
 class JWT_Manager:
-    def __init__(self, secret, algorithm = 'RS256'):
-        self.secret = secret
+    def __init__(self, private_key, public_key, algorithm = 'RS256'):
+        self.private_key = private_key
+        self.public_key = public_key
         self.algorithm = algorithm
 
     def encode(self, data):
         try:
-            encoded = jwt.encode(data, self.secret, algorithm=self.algorithm,)
+            encoded = jwt.encode(data, self.private_key, algorithm=self.algorithm)
             return encoded
-        except:
+        except Exception as e:
+            print(e)
             return None
 
     def decode(self, token):
         try:
-            decoded = jwt.decode(token, self.secret, algorithms=[self.algorithm])
+            decoded = jwt.decode(token, self.public_key, algorithms=[self.algorithm])
             return decoded
         except Exception as e:
             print(e)
